@@ -1,7 +1,7 @@
 import { Matrix4 } from '../../Math';
 
 export default class BaseEntity {
-    matrix: Matrix4;
+    matrix: Matrix4 = new Matrix4();
 
     children: [];
 
@@ -33,7 +33,12 @@ export default class BaseEntity {
     // TODO: scaleN
     // TODO: rotate
     // TODO: rotateX
-    // TODO: rotateY
+
+    rotateY(rad: number) {
+        Matrix4.rotateY(this.matrix, this.matrix, rad);
+        return this;
+    }
+
     // TODO: rotateZ
     // TODO: rotateYPR
     // TODO: translate
