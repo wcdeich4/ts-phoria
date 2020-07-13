@@ -2,6 +2,9 @@
 import Matrix4 from './Matrix4';
 import Vector3 from './Vector3';
 
+/**
+ * 4 Dimensional Vector.
+ */
 export default class Vector4 {
     constructor() {
         this[0] = 0;
