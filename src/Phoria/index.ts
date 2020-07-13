@@ -11,6 +11,7 @@ import {
 } from './Entity';
 import { Edge, Polygon } from './Interfaces';
 import MeshFactory from './MeshFactory';
+import ImagePreLoader from './ImagePreLoader';
 
 export {
     Scene,
@@ -28,4 +29,5 @@ export {
     Polygon,
     // Utils
     MeshFactory,
+    ImagePreLoader,
 };

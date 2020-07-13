@@ -177,7 +177,7 @@ export default class Entity extends BaseEntity {
         edges?: Edge[] | null;
         style?: EntityStyleOptional | null;
         onRender?: Function | null;
-    }) {
+    }): Entity {
         const e = new Entity();
         if (desc.id) e.id = desc.id;
         if (desc.matrix) e.matrix = desc.matrix;
