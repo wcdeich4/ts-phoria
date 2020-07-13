@@ -49,7 +49,7 @@ export default class Renderer {
                 // Distant lights have no "position", just a direction - they light the world with parallel rays
                 // from an infinitely distant location - closest example is light from the sun when overhead
                 // note that light worlddirection is precalculated as negative.
-                const dotVP = Vector3.dot(normal, light.worlddirection);
+                const dotVP = normal.dot(light.worlddirection);
                 // don't waste any more time calculating if the dot product is negative i.e. > 90 degrees
                 if (dotVP <= 0) {
                     return;
@@ -59,11 +59,11 @@ export default class Renderer {
             } else if (light instanceof PointLight) {
                 // Point lights have a position and a fall-off known as attenuation
                 // distance falloff calculation - each light is additive to the total
-                const vecToLight = Vector3.subtract(new Vector3(), position, light.worldPosition);
-                const distance = Vector3.magnitude(vecToLight);
+                const vecToLight = Vector3.subtract(position, light.worldPosition);
+                const distance = vecToLight.length();
                 let attenuation = 0;
-                vecToLight.normalize();
-                const dotVP = Vector3.dot(normal, Vector3.negate(vecToLight, vecToLight));
+                vecToLight.normalize().negate();
+                const dotVP = normal.dot(vecToLight);
                 // don't waste any more time calculating if the dot product is negative i.e. > 90 degrees
                 if (dotVP <= 0) {
                     return;
@@ -77,10 +77,9 @@ export default class Renderer {
                 }
                 // Optional specular highlight calculation
                 if (obj.style.specular !== 0) {
-                    const halfV = Vector3.add(new Vector3(), vecToLight,
-                        scene.cameraPosition.getVector3());
+                    const halfV = Vector3.add(vecToLight, scene.cameraPosition);
                     halfV.normalize();
-                    const dotHV = Vector3.dot(normal, halfV);
+                    const dotHV = normal.dot(halfV);
                     const pf = ((dotHV ** obj.style.specular) * light.intensity)
                         / attenuation;
                     rgb[0] += pf * light.color[0];
@@ -107,8 +106,8 @@ export default class Renderer {
                 brightness = light.intensity;
             } else if (light instanceof PointLight) {
                 // Point lights have a position and a fall-off known as attenuation
-                const vecToLight = Vector3.subtract(new Vector3(), position, light.worldPosition);
-                const distance = Vector3.magnitude(vecToLight);
+                const vecToLight = Vector3.subtract(position, light.worldPosition);
+                const distance = vecToLight.length();
                 let attenuation = 0;
                 vecToLight.normalize();
                 if (light.attenuationFactor === 'squared') {

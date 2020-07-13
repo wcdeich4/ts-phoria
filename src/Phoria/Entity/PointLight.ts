@@ -38,7 +38,7 @@ export default class PointLight extends BaseLight {
             this.position.z,
             1,
         );
-        Vector4.transformMat4(vec, vec, matLocal);
+        vec.transform(matLocal);
         this.worldPosition = vec.getVector3();
     }
 }

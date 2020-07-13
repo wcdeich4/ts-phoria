@@ -1,4 +1,5 @@
 import { Vector3 } from '../Math';
+// eslint-disable-next-line no-unused-vars
 import { Edge, Polygon } from './Interfaces';
 
 function v3(data: {

@@ -212,20 +212,26 @@ class Scene {
                     let avz = 0;
                     obj.points.forEach((verts, index) => {
                         // construct homogeneous coordinate for the vertex as a vec4
-                        let vec = Vector4.set(obj.worldcoords[index],
-                            verts[0], verts[1], verts[2], 1.0);
+                        let vec = obj.worldcoords[index].set(verts[0], verts[1], verts[2], 1.0);
                         // local object transformation -> world space
                         // skip local transform if matrix not present
                         // else store locally transformed vec4 world points
                         if (matLocal) {
-                            Vector4.transformMat4(obj.worldcoords[index], vec, matLocal);
+                            obj.worldcoords[index] = vec.getTransformed(matLocal);
+                            // Vector4.transformMat4(obj.worldcoords[index], vec, matLocal);
                         }
                         // multiply by camera matrix to generate camera space coords
+                        /*
                         Vector4.transformMat4(obj.cameracoords[index],
                             obj.worldcoords[index], camera);
+                        */
+                        obj.cameracoords[index] = obj.worldcoords[index].getTransformed(camera);
                         // multiply by perspective matrix to generate perspective and clip coordinates
+                        /*
                         Vector4.transformMat4(obj.coords[index],
                             obj.cameracoords[index], perspective);
+                        */
+                        obj.coords[index] = obj.cameracoords[index].getTransformed(perspective);
                         // perspective division to create vec2 NDC then finally transform to viewport
                         // clip calculation occurs before the viewport transform
                         vec = obj.coords[index];
@@ -275,9 +281,9 @@ class Scene {
                         if (obj.style.drawmode === 'solid' && obj.polygons.length !== 0) {
                             // TODO: have a flag on scene for "transposedNormalMatrix..." - i.e. make it optional?
                             // invert and transpose the local model matrix - for correct normal scaling
-                            const matNormals = Matrix4.invert(new Matrix4(),
-                                matLocal || new Matrix4());
-                            Matrix4.transpose(matNormals, matNormals);
+                            const refMat = matLocal || new Matrix4();
+                            const matNormals = refMat.getInverted();
+                            matNormals.transpose();
                             if (obj.style.shademode === 'lightsource') {
                                 // transform each polygon normal
                                 obj.polygons.forEach((polygon) => {
@@ -289,12 +295,16 @@ class Scene {
                                     const { normal, worldnormal } = poly;
                                     // use vec3 to ensure normal directional component is not modified
                                     const normal3 = normal.getVector3();
-                                    const worldnormal3 = worldnormal.getVector3();
-                                    Vector3.transformMat4(worldnormal3, normal3, matNormals);
+                                    // const worldnormal3 = worldnormal.getVector3();
+                                    // Vector3.transformMat4(worldnormal3, normal3, matNormals);
+                                    const worldnormal3 = normal3.getTransformed(matNormals);
                                     worldnormal3.normalize();
-                                    Vector4.set(poly.worldnormal,
-                                        worldnormal3[0], worldnormal3[1], worldnormal3[2],
-                                        worldnormal[3]);
+                                    poly.worldnormal.set(
+                                        worldnormal3[0],
+                                        worldnormal3[1],
+                                        worldnormal3[2],
+                                        worldnormal[3],
+                                    );
                                 });
                             }
                             // TODO: gouraud?

@@ -1,7 +1,11 @@
 import Renderer from './Renderer';
+// eslint-disable-next-line no-unused-vars
 import Scene from './Scene';
+// eslint-disable-next-line no-unused-vars
 import { Entity } from './Entity';
+// eslint-disable-next-line no-unused-vars
 import { Polygon, Edge } from './Interfaces';
+// eslint-disable-next-line no-unused-vars
 import { Vector3, Vector4, TWOPI } from '../Math';
 import { averagePolyVertex } from './Utils';
 

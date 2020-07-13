@@ -27,40 +27,44 @@ export default class BaseEntity {
         this.matrix.identity();
     }
 
-    // TODO: invert
+    invert() {
+        this.matrix.invert();
+        return this;
+    }
+
     multiply(m: Matrix4) {
         this.matrix.multiply(m);
         return this;
     }
 
     scale(vec: Vector3) {
-        Matrix4.scale(this.matrix, this.matrix, vec);
+        this.matrix.scale(vec);
         return this;
     }
 
     scaleN(n: number) {
         const v = Vector3.fromValues(n, n, n);
-        Matrix4.scale(this.matrix, this.matrix, v);
+        this.matrix.scale(v);
         return this;
     }
 
     rotate(rad: number, axis: Vector3) {
-        Matrix4.rotate(this.matrix, this.matrix, rad, axis);
+        this.matrix.rotate(rad, axis);
         return this;
     }
 
     rotateX(rad: number) {
-        Matrix4.rotateX(this.matrix, this.matrix, rad);
+        this.matrix.rotateX(rad);
         return this;
     }
 
     rotateY(rad: number) {
-        Matrix4.rotateY(this.matrix, this.matrix, rad);
+        this.matrix.rotateY(rad);
         return this;
     }
 
     rotateZ(rad: number) {
-        Matrix4.rotateZ(this.matrix, this.matrix, rad);
+        this.matrix.rotateZ(rad);
         return this;
     }
 
@@ -70,25 +74,25 @@ export default class BaseEntity {
     }
 
     translate(vec: Vector3) {
-        Matrix4.translate(this.matrix, this.matrix, vec);
+        this.matrix.translate(vec);
         return this;
     }
 
     translateX(n: number) {
         const v = Vector3.fromValues(n, 0, 0);
-        Matrix4.translate(this.matrix, this.matrix, v);
+        this.matrix.translate(v);
         return this;
     }
 
     translateY(n: number) {
         const v = Vector3.fromValues(0, n, 0);
-        Matrix4.translate(this.matrix, this.matrix, v);
+        this.matrix.translate(v);
         return this;
     }
 
     translateZ(n: number) {
         const v = Vector3.fromValues(0, 0, n);
-        Matrix4.translate(this.matrix, this.matrix, v);
+        this.matrix.translate(v);
         return this;
     }
 
@@ -97,7 +101,7 @@ export default class BaseEntity {
     }
 
     transpose() {
-        Matrix4.transpose(this.matrix, this.matrix);
+        this.matrix.transpose();
         return this;
     }
 }
