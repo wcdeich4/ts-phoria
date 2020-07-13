@@ -3,8 +3,8 @@ export interface EntityStyle {
     diffuse: number;
     specular: number;
     drawmode: 'solid' | 'wireframe' | 'point';
-    shademode: string;
-    fillmode: string;
+    shademode: 'plain' | 'lightsource' | 'sprite' | 'callback';
+    fillmode: 'fill' | 'filltwice' | 'inflate' | 'fillstroke' | 'hiddenline';
     objectsortmode: 'sorted' | 'front' | 'back';
     geometrysortmode: string;
     linewidth: number;
@@ -22,8 +22,8 @@ export interface EntityStyleOptional {
     diffuse?: number;
     specular?: number;
     drawmode?: 'solid' | 'wireframe' | 'point';
-    shademode?: string;
-    fillmode?: string;
+    shademode?: 'plain' | 'lightsource' | 'sprite' | 'callback';
+    fillmode?: 'fill' | 'filltwice' | 'inflate' | 'fillstroke' | 'hiddenline';
     objectsortmode?: 'sorted' | 'front' | 'back';
     geometrysortmode?: string;
     linewidth?: number;
