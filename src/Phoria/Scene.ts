@@ -218,19 +218,10 @@ class Scene {
                         // else store locally transformed vec4 world points
                         if (matLocal) {
                             obj.worldcoords[index] = vec.getTransformed(matLocal);
-                            // Vector4.transformMat4(obj.worldcoords[index], vec, matLocal);
                         }
                         // multiply by camera matrix to generate camera space coords
-                        /*
-                        Vector4.transformMat4(obj.cameracoords[index],
-                            obj.worldcoords[index], camera);
-                        */
                         obj.cameracoords[index] = obj.worldcoords[index].getTransformed(camera);
                         // multiply by perspective matrix to generate perspective and clip coordinates
-                        /*
-                        Vector4.transformMat4(obj.coords[index],
-                            obj.cameracoords[index], perspective);
-                        */
                         obj.coords[index] = obj.cameracoords[index].getTransformed(perspective);
                         // perspective division to create vec2 NDC then finally transform to viewport
                         // clip calculation occurs before the viewport transform
