@@ -229,10 +229,10 @@ export default class CanvasRenderer extends Renderer {
         this.ctx.save();
 
         const getTexture = () => {
-            if (poly.texture !== null) {
+            if (poly.texture !== null && poly.texture !== undefined) {
                 return poly.texture;
             }
-            if (obj.style.texture !== null) {
+            if (obj.style.texture !== null && obj.style.texture !== undefined) {
                 return obj.style.texture;
             }
             return null;
