@@ -227,8 +227,20 @@ export default class CanvasRenderer extends Renderer {
         }
         // render the polygon - textured or one of the solid fill modes
         this.ctx.save();
-        if (obj.style.texture || poly.texture) {
-            const idx = poly.texture ? poly.texture : obj.style.texture;
+
+        const getTexture = () => {
+            if (poly.texture !== null) {
+                return poly.texture;
+            }
+            if (obj.style.texture !== null) {
+                return obj.style.texture;
+            }
+            return null;
+        };
+
+        const idx = getTexture();
+        if (idx !== null) {
+            // const idx = poly.texture ? poly.texture : obj.style.texture;
             const bitmap = obj.textures[idx];
             const fRenderTriangle = (
                 vs: [number, number][],

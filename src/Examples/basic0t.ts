@@ -16,7 +16,6 @@ export default function Example0t() {
         loader.addImage(bitmaps[i], `images/texture${i}.png`);
     }
     loader.onLoadCallback(() => {
-        console.log(bitmaps);
         // get the canvas DOM element and the 2D drawing context
         const canvas = document.getElementById('canvas');
         // create the scene and setup camera, perspective and viewport
