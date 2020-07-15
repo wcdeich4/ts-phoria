@@ -1,13 +1,19 @@
 {
-  "name": "modern-phoria",
-  "version": "1.0.0",
+  "name": "ts-phoria",
+  "version": "0.1.0",
   "description": "",
-  "main": "build/index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
+    "ex": "gulp examples",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "Kevin Roast <kevtoast@yahoo.com> | Eduardo Oliveira <eduardo_y05@outlook.com>",
   "license": "MIT",
+  "files": [
+    "build"
+  ],
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^3.6.1",
     "@typescript-eslint/parser": "^3.6.1",

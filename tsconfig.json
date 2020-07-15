@@ -3,17 +3,19 @@
         "target": "es5",
         "module": "CommonJS",
         "declaration": true,
-        "outDir": "build",
+        "sourceMap": true,
+        "outDir": "dist",
+        "removeComments": true,
         "strict": true,
-        "esModuleInterop": true,
-        "noImplicitAny": true
+        "noImplicitAny": true,
+        "esModuleInterop": true
     },
     "exclude": [
         "node_modules",
         "dist",
         "build",
         "images",
-        "src/main.ts",
+        "src/demo.ts",
         "src/Examples"
     ]
 }

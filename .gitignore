@@ -1,3 +1,4 @@
 dist
+#!docs/dist # remove the comment here when the first public version is disponible
 node_modules
 build

@@ -20,9 +20,12 @@ import {
     // Utils
     MeshFactory,
     ImagePreLoader,
+    View,
+    MouseTrackingInstance,
 } from './Phoria';
 import {
     // Vector
+    Vector2,
     Vector3,
     Vector4,
     // Matrix
@@ -33,16 +36,17 @@ import {
     TWOPI,
 } from './Math';
 
-const Math = {
+export {
+    // Vector
+    Vector2,
     Vector3,
     Vector4,
+    // Matrix
     Matrix4,
+    // constants
     RADIANS,
     EPSILON,
     TWOPI,
-};
-
-export {
     Scene,
     CameraHandler,
     TriggerHandler,
@@ -61,5 +65,6 @@ export {
     Polygon,
     MeshFactory,
     ImagePreLoader,
-    Math,
+    View,
+    MouseTrackingInstance,
 };
