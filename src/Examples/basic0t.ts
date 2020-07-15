@@ -15,6 +15,9 @@ export default function Example0t() : void {
         bitmaps.push(new Image());
         loader.addImage(bitmaps[i], `images/texture${i}.png`);
     }
+    loader.errorCallback = (file) => {
+        alert(`Erro! Arquivo não encontrado: ${file}!`);
+    };
     loader.onLoadCallback(() => {
         // get the canvas DOM element and the 2D drawing context
         const canvas = document.getElementById('canvas');

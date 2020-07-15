@@ -3,6 +3,8 @@ export default class ImagePreLoader {
 
     callback: ((loader: ImagePreLoader) => void) | null = null;
 
+    errorCallback: ((file: string) => void) | null = null;
+
     counter = 0;
 
     addImage(img: HTMLImageElement, url: string): void {
@@ -17,6 +19,11 @@ export default class ImagePreLoader {
                     return;
                 }
                 this.callback(this);
+            }
+        };
+        el.onerror = () => {
+            if (this.errorCallback) {
+                this.errorCallback(url);
             }
         };
         this.images.push(el);

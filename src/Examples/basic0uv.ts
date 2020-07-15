@@ -14,6 +14,9 @@ export default function Example0uv() : void {
     bitmaps.push(new Image(), new Image());
     loader.addImage(bitmaps[0], 'images/texture-wall.png');
     loader.addImage(bitmaps[1], 'images/texture5.png');
+    loader.errorCallback = (file) => {
+        alert(`Erro! Arquivo não encontrado: ${file}!`);
+    };
     loader.onLoadCallback(() => {
         // get the canvas DOM element and the 2D drawing context
         const canvas = document.getElementById('canvas');
