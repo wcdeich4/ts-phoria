@@ -1,20 +1,16 @@
-// eslint-disable-next-line no-unused-vars
 import Scene from './Scene';
-// eslint-disable-next-line no-unused-vars
 import { Vector3, Vector4, EPSILON } from '../Math';
 import {
-    // eslint-disable-next-line no-unused-vars
     Entity,
-    // eslint-disable-next-line no-unused-vars
     BaseLight,
     DistantLight,
     PointLight,
 } from './Entity';
 
 export default class Renderer {
-    sort: boolean = true;
+    sort = true;
 
-    sortObjects(scene: Scene) {
+    sortObjects(scene: Scene) : void {
         if (!this.sort) {
             return;
         }
@@ -39,8 +35,13 @@ export default class Renderer {
         });
     }
 
-    static calcNormalBrightness(position: Vector3, normal: Vector3, scene: Scene, obj: Entity) {
-        const rgb = [0.0, 0.0, 0.0];
+    static calcNormalBrightness(
+        position: Vector3,
+        normal: Vector3,
+        scene: Scene,
+        obj: Entity,
+    ) : [number, number, number] {
+        const rgb : [number, number, number] = [0.0, 0.0, 0.0];
         const { lights } = scene;
         lights.forEach((value) => {
             const light = value;
@@ -86,7 +87,8 @@ export default class Renderer {
                     rgb[1] += pf * light.color[1];
                     rgb[2] += pf * light.color[2];
                 }
-                brightness = ((obj.style.diffuse * dotVP) * light.intensity) / attenuation;
+                brightness = ((obj.style.diffuse * dotVP) * light.intensity)
+                    / attenuation;
             }
             // apply each colour component based on light levels (0.0 to 1.0)
             rgb[0] += brightness * light.color[0];
@@ -96,8 +98,11 @@ export default class Renderer {
         return rgb;
     }
 
-    static calcPositionBrightness(position: Vector3, lights: BaseLight[]) {
-        const rgb = [0.0, 0.0, 0.0];
+    static calcPositionBrightness(
+        position: Vector3,
+        lights: BaseLight[],
+    ) : [number, number, number] {
+        const rgb : [number, number, number] = [0.0, 0.0, 0.0];
         lights.forEach((value) => {
             const light = value;
             let brightness = 0;
@@ -131,7 +136,11 @@ export default class Renderer {
         return rgb;
     }
 
-    static inflatePolygon(vertices: number[], coords: Vector4[], pixelsInflate: number | null) {
+    static inflatePolygon(
+        vertices: number[],
+        coords: Vector4[],
+        pixelsInflate: number | null,
+    ) : Array<[number, number]> {
         const pixels = pixelsInflate || 0.5;
         const inflatedVertices = new Array<[number, number]>(vertices.length);
         vertices.forEach((vertex, index) => {
@@ -162,7 +171,11 @@ export default class Renderer {
         return inflatedVertices;
     }
 
-    static inflatePolygonFull(vertices: number[], coords: Vector4[], pixelsInflate: number | null) {
+    static inflatePolygonFull(
+        vertices: number[],
+        coords: Vector4[],
+        pixelsInflate: number | null,
+    ) : Array<[number, number]> {
         const pixels = pixelsInflate || 0.5;
         // generate vertices of parallel edges
         const pedges = [];
@@ -241,7 +254,7 @@ export default class Renderer {
         line0v1: {x: number, y: number},
         line1v0: {x: number, y: number},
         line1v1: {x: number, y: number},
-    ) {
+    ) : [number, number] {
         const a1 = line0v1.x - line0v0.x;
         const b1 = line1v0.x - line1v1.x;
         const c1 = line1v0.x - line0v0.x;

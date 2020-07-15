@@ -1,6 +1,4 @@
-/* eslint-disable prefer-destructuring */
 import { EPSILON } from './constants';
-// eslint-disable-next-line no-unused-vars
 import Vector3 from './Vector3';
 
 /**

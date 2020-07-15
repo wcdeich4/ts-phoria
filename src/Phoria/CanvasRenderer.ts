@@ -1,11 +1,7 @@
 import Renderer from './Renderer';
-// eslint-disable-next-line no-unused-vars
 import Scene from './Scene';
-// eslint-disable-next-line no-unused-vars
 import { Entity } from './Entity';
-// eslint-disable-next-line no-unused-vars
 import { Polygon, Edge } from './Interfaces';
-// eslint-disable-next-line no-unused-vars
 import { Vector3, Vector4, TWOPI } from '../Math';
 import { averagePolyVertex } from './Utils';
 
@@ -20,7 +16,10 @@ export default class CanvasRenderer extends Renderer {
         this.ctx = this.canvas.getContext('2d');
     }
 
-    render(scene : Scene, fnClear: (ctx: CanvasRenderingContext2D) => void | null) {
+    render(
+        scene : Scene,
+        fnClear?: (ctx: CanvasRenderingContext2D) => void | null,
+    ) : void {
         this.sortObjects(scene);
         // clear the canvas before rendering begins - optional clearing function can be supplied
         if (!fnClear) {
@@ -37,7 +36,8 @@ export default class CanvasRenderer extends Renderer {
             }
             if (obj.style.drawmode === 'solid') {
                 // ensure line width is set if appropriate fillmode is being used
-                if (obj.style.fillmode === 'fillstroke' || obj.style.fillmode === 'hiddenline') {
+                if (obj.style.fillmode === 'fillstroke'
+                    || obj.style.fillmode === 'hiddenline') {
                     this.ctx.lineWidth = 1.0;
                 }
                 // render the pre-sorted polygons
@@ -87,7 +87,7 @@ export default class CanvasRenderer extends Renderer {
         });
     }
 
-    renderPoint(obj: Entity, scene: Scene, coord: Vector4, index: number) {
+    renderPoint(obj: Entity, scene: Scene, coord: Vector4, index: number) : void {
         // perform clip of point if vertex has been marked for clipping
         if (obj.clip[index]) {
             return;
@@ -118,7 +118,8 @@ export default class CanvasRenderer extends Renderer {
             }
         } else if (obj.style.shademode === 'lightsource') {
             // lighting calc
-            const rgb = CanvasRenderer.calcPositionBrightness(obj.worldcoords[index].getVector3(),
+            const rgb = CanvasRenderer.calcPositionBrightness(
+                obj.worldcoords[index].getVector3(),
                 scene.lights);
             const r = Math.min(Math.ceil(rgb[0] * obj.style.color[0]), 255);
             const g = Math.min(Math.ceil(rgb[1] * obj.style.color[1]), 255);
@@ -131,7 +132,7 @@ export default class CanvasRenderer extends Renderer {
         }
     }
 
-    renderEdge(obj: Entity, scene: Scene, edge: Edge) {
+    renderEdge(obj: Entity, scene: Scene, edge: Edge) : void {
         // perform clip of edge if all vertices have been marked for clipping
         if (obj.clip[edge.a] && obj.clip[edge.b]) {
             return;
@@ -140,7 +141,8 @@ export default class CanvasRenderer extends Renderer {
         if (obj.style.linescale !== 0) {
             // use the perspective divisor to calculate line width scaling
             this.ctx.lineWidth = ((obj.style.linewidth * obj.style.linescale)
-                / ((obj.coords[edge.a][3] + obj.coords[edge.b][3]) * 0.5)) * scene.perspectiveScale;
+                / ((obj.coords[edge.a][3] + obj.coords[edge.b][3]) * 0.5))
+                * scene.perspectiveScale;
         }
         // lighting calc
         if (obj.style.shademode === 'lightsource') {
@@ -167,7 +169,7 @@ export default class CanvasRenderer extends Renderer {
         }
     }
 
-    renderPolygon(obj: Entity, scene: Scene, poly: Polygon) {
+    renderPolygon(obj: Entity, scene: Scene, poly: Polygon) : void {
         const { coords, clip } = obj;
         const { vertices } = poly;
         const color = poly.color || obj.style.color;
@@ -268,12 +270,17 @@ export default class CanvasRenderer extends Renderer {
                 // TODO: this is far from perfect - due to perspective corrected texture mapping issues see:
                 //       http://tulrich.com/geekstuff/canvas/perspective.html
                 // collapse terms
-                const denom = 1.0 / (sx0 * (sy2 - sy1) - sx1 * sy2 + sx2 * sy1 + (sx1 - sx2) * sy0);
+                const denom = 1.0
+                    / (sx0 * (sy2 - sy1) - sx1 * sy2 + sx2 * sy1 + (sx1 - sx2) * sy0);
                 // calculate context transformation matrix
-                const m11 = -(sy0 * (x2 - x1) - sy1 * x2 + sy2 * x1 + (sy1 - sy2) * x0) * denom;
-                const m12 = (sy1 * y2 + sy0 * (y1 - y2) - sy2 * y1 + (sy2 - sy1) * y0) * denom;
-                const m21 = (sx0 * (x2 - x1) - sx1 * x2 + sx2 * x1 + (sx1 - sx2) * x0) * denom;
-                const m22 = -(sx1 * y2 + sx0 * (y1 - y2) - sx2 * y1 + (sx2 - sx1) * y0) * denom;
+                const m11 = -(sy0 * (x2 - x1) - sy1 * x2 + sy2 * x1 + (sy1 - sy2) * x0)
+                    * denom;
+                const m12 = (sy1 * y2 + sy0 * (y1 - y2) - sy2 * y1 + (sy2 - sy1) * y0)
+                    * denom;
+                const m21 = (sx0 * (x2 - x1) - sx1 * x2 + sx2 * x1 + (sx1 - sx2) * x0)
+                    * denom;
+                const m22 = -(sx1 * y2 + sx0 * (y1 - y2) - sx2 * y1 + (sx2 - sx1) * y0)
+                    * denom;
                 const dx = (sx0 * (sy2 * x1 - sy1 * x2)
                     + sy0 * (sx1 * x2 - sx2 * x1)
                     + (sx2 * sy1 - sx1 * sy2) * x0) * denom;
@@ -313,8 +320,17 @@ export default class CanvasRenderer extends Renderer {
                     ty2 = bitmap.height * poly.uvs[5];
                 }
                 // TODO: Chrome does not need the texture poly inflated!
-                const inflatedVertices = CanvasRenderer.inflatePolygon(vertices, coords, 0.5);
-                fRenderTriangle.call(this, inflatedVertices, tx0, ty0, tx1, ty1, tx2, ty2);
+                const inflatedVertices
+                    = CanvasRenderer.inflatePolygon(vertices, coords, 0.5);
+                fRenderTriangle.call(
+                    this,
+                    inflatedVertices,
+                    tx0,
+                    ty0,
+                    tx1,
+                    ty1,
+                    tx2,
+                    ty2);
                 // apply optional color fill to shade and light the texture image
                 if (fillStyle !== null) {
                     this.ctx.fill();
@@ -336,9 +352,17 @@ export default class CanvasRenderer extends Renderer {
                 }
                 this.ctx.save();
                 // TODO: Chrome does not need the texture poly inflated!
-                let inflatedVertices = CanvasRenderer.inflatePolygon(vertices.slice(0, 3),
-                    coords, 0.5);
-                fRenderTriangle.call(this, inflatedVertices, tx0, ty0, tx1, ty1, tx2, ty2);
+                let inflatedVertices
+                    = CanvasRenderer.inflatePolygon(vertices.slice(0, 3), coords, 0.5);
+                fRenderTriangle.call(
+                    this,
+                    inflatedVertices,
+                    tx0,
+                    ty0,
+                    tx1,
+                    ty1,
+                    tx2,
+                    ty2);
                 this.ctx.restore();
 
                 tx0 = bitmap.width;
@@ -363,16 +387,27 @@ export default class CanvasRenderer extends Renderer {
                 ];
                 // TODO: Chrome does not need the texture poly inflated!
                 inflatedVertices = CanvasRenderer.inflatePolygon(v, coords, 0.5);
-                fRenderTriangle.call(this, inflatedVertices, tx0, ty0, tx1, ty1, tx2, ty2);
+                fRenderTriangle.call(
+                    this,
+                    inflatedVertices,
+                    tx0,
+                    ty0,
+                    tx1,
+                    ty1,
+                    tx2,
+                    ty2);
                 this.ctx.restore();
                 // apply optional color fill to shade and light the texture image
                 if (fillStyle !== null) {
                     // TODO: better to inflate again or fill two tris as above?
-                    inflatedVertices = CanvasRenderer.inflatePolygon(vertices, coords, 0.75);
+                    inflatedVertices
+                        = CanvasRenderer.inflatePolygon(vertices, coords, 0.75);
                     this.ctx.beginPath();
                     vertices.forEach((vertex, i) => {
                         if (i === 0) {
-                            this.ctx.moveTo(inflatedVertices[0][0], inflatedVertices[0][1]);
+                            this.ctx.moveTo(
+                                inflatedVertices[0][0],
+                                inflatedVertices[0][1]);
                             return;
                         }
                         this.ctx.lineTo(inflatedVertices[i][0], inflatedVertices[i][1]);
@@ -386,14 +421,17 @@ export default class CanvasRenderer extends Renderer {
             // solid colour fill
             if (obj.style.fillmode === 'inflate') {
                 // inflate the polygon screen coords to cover the 0.5 pixel cracks between canvas fill()ed polygons
-                const inflatedVertices = CanvasRenderer.inflatePolygon(vertices, coords, 0.5);
+                const inflatedVertices
+                    = CanvasRenderer.inflatePolygon(vertices, coords, 0.5);
                 this.ctx.beginPath();
                 vertices.forEach((vertex, index) => {
                     if (index === 0) {
                         this.ctx.moveTo(inflatedVertices[0][0], inflatedVertices[0][1]);
                         return;
                     }
-                    this.ctx.lineTo(inflatedVertices[index][0], inflatedVertices[index][1]);
+                    this.ctx.lineTo(
+                        inflatedVertices[index][0],
+                        inflatedVertices[index][1]);
                 });
                 this.ctx.closePath();
             } else {
@@ -405,7 +443,9 @@ export default class CanvasRenderer extends Renderer {
                         return;
                     }
                     // move to each additional point
-                    this.ctx.lineTo(coords[vertices[index]][0], coords[vertices[index]][1]);
+                    this.ctx.lineTo(
+                        coords[vertices[index]][0],
+                        coords[vertices[index]][1]);
                 });
                 // no need to plot back to first point - as path closes shape automatically
                 this.ctx.closePath();

@@ -1,8 +1,15 @@
 import { Vector3, Vector4, Matrix4 } from '../../Math';
-import BaseEntity from './BaseEntity';
+import BaseEntity, { SceneHandler, BeforeSceneHandler } from './BaseEntity';
 import { EntityStyle, EntityStyleOptional } from './EntityStyle';
 import { Polygon, Edge } from '../Interfaces';
 import { calcNormalVector } from '../Utils';
+
+export type RenderHandle = (
+    ctx?: CanvasRenderingContext2D,
+    coordA?: Vector4,
+    coordB?: Vector4,
+    w?: number
+) => void;
 
 export default class Entity extends BaseEntity {
     style: EntityStyle;
@@ -13,7 +20,7 @@ export default class Entity extends BaseEntity {
 
     polygons: Polygon[];
 
-    onRenderHandlers: Function[];
+    onRenderHandlers: RenderHandle[];
 
     // buffers
     worldcoords: Array<Vector4> = null;
@@ -33,12 +40,14 @@ export default class Entity extends BaseEntity {
         this.style = Entity.createStyle(null);
     }
 
-    onRender(fn: Function) {
-        if (this.onRenderHandlers === null) this.onRenderHandlers = [];
+    onRender(fn: RenderHandle) : void {
+        if (this.onRenderHandlers === null) {
+            this.onRenderHandlers = [];
+        }
         this.onRenderHandlers = this.onRenderHandlers.concat(fn);
     }
 
-    generatePolygonNormals() {
+    generatePolygonNormals() : void {
         if (this.polygons) {
             // calculate normal vectors for face data - and set default colour
             // value if not supplied in the data set
@@ -61,7 +70,7 @@ export default class Entity extends BaseEntity {
         }
     }
 
-    initCoordinateBuffers() {
+    initCoordinateBuffers() : void {
         const len = this.points.length;
         if (this.worldcoords === null || this.worldcoords.length < len) {
             this.worldcoords = new Array<Vector4>(len);
@@ -86,7 +95,11 @@ export default class Entity extends BaseEntity {
         }
     }
 
-    getScreenBounds() {
+    getScreenBounds() : {
+        minx: number;
+        miny: number;
+        maxx: number;
+        maxy: number; } {
         let minx = 10000;
         let miny = 10000;
         let maxx = -10000;
@@ -118,7 +131,13 @@ export default class Entity extends BaseEntity {
         };
     }
 
-    getWorldBounds() {
+    getWorldBounds() : {
+        minx: number;
+        miny: number;
+        maxx: number;
+        maxy: number;
+        minz: number;
+        maxz: number; } {
         let minx = 10000;
         let miny = 10000;
         let minz = 10000;
@@ -169,14 +188,14 @@ export default class Entity extends BaseEntity {
         id?: string | null;
         matrix?: Matrix4 | null;
         children?: [] | null;
-        onBeforeScene?: Function | null;
-        onScene?: Function | null;
+        onBeforeScene?: BeforeSceneHandler | null;
+        onScene?: SceneHandler | null;
         disabled?: boolean | null;
         points?: Vector3[] | null;
         polygons?: Polygon[] | null;
         edges?: Edge[] | null;
         style?: EntityStyleOptional | null;
-        onRender?: Function | null;
+        onRender?: RenderHandle | null;
     }): Entity {
         const e = new Entity();
         if (desc.id) e.id = desc.id;

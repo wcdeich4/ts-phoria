@@ -1,6 +1,9 @@
 import { Vector4, Vector3 } from '../../Math';
 
-export default function averagePolyVertex(vertices: number[], worldcoords: Vector4[]) {
+export default function averagePolyVertex(
+    vertices: number[],
+    worldcoords: Vector4[],
+): Vector3 {
     let avx = 0;
     let avy = 0;
     let avz = 0;

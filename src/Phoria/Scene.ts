@@ -5,9 +5,13 @@ import {
     Matrix4,
     EPSILON,
 } from '../Math';
-// eslint-disable-next-line no-unused-vars
 import { Entity, BaseEntity, BaseLight } from './Entity';
 import { sortPolygons, sortEdges, sortPoints } from './Utils';
+
+export type CameraHandler = (
+    position : Vector3,
+    lookat : Vector3,
+    up: Vector3) => void;
 
 class Scene {
     camera: {
@@ -54,7 +58,7 @@ class Scene {
         height: number;
     };
 
-    lastTime: number = 0;
+    lastTime = 0;
 
     cameraPosition: Vector4;
 
@@ -72,9 +76,9 @@ class Scene {
 
     entities: {
         [key: string]: BaseEntity;
-    }
+    };
 
-    onCameraHandlers: Function[] = [];
+    onCameraHandlers: CameraHandler[] = [];
 
     constructor() {
         this.camera = {
@@ -101,18 +105,18 @@ class Scene {
 
     // TODO: fromJSON?/toJSON?
 
-    findEntity(id) {
+    findEntity(id: string) : BaseEntity {
         return this.entities[id];
     }
 
-    onCamera(fn: Function) {
+    onCamera(fn: CameraHandler) : void {
         if (this.onCameraHandlers === null) {
             this.onCameraHandlers = [];
         }
         this.onCameraHandlers = this.onCameraHandlers.concat(fn);
     }
 
-    modelView() {
+    modelView() : void {
         const now = Date.now();
         const time = (now - this.lastTime) / 1000;
         this.lastTime = now;
@@ -133,7 +137,12 @@ class Scene {
 
         if (this.onCameraHandlers !== null) {
             this.onCameraHandlers.forEach((handler) => {
-                handler.call(this, this.camera.position, this.camera.lookat, this.camera.up);
+                handler.call(
+                    this,
+                    this.camera.position,
+                    this.camera.lookat,
+                    this.camera.up,
+                );
             });
         }
         // generate the lookAt matrix
@@ -212,7 +221,12 @@ class Scene {
                     let avz = 0;
                     obj.points.forEach((verts, index) => {
                         // construct homogeneous coordinate for the vertex as a vec4
-                        let vec = obj.worldcoords[index].set(verts[0], verts[1], verts[2], 1.0);
+                        let vec = obj.worldcoords[index].set(
+                            verts[0],
+                            verts[1],
+                            verts[2],
+                            1.0,
+                        );
                         // local object transformation -> world space
                         // skip local transform if matrix not present
                         // else store locally transformed vec4 world points
@@ -220,9 +234,11 @@ class Scene {
                             obj.worldcoords[index] = vec.getTransformed(matLocal);
                         }
                         // multiply by camera matrix to generate camera space coords
-                        obj.cameracoords[index] = obj.worldcoords[index].getTransformed(camera);
+                        obj.cameracoords[index]
+                            = obj.worldcoords[index].getTransformed(camera);
                         // multiply by perspective matrix to generate perspective and clip coordinates
-                        obj.coords[index] = obj.cameracoords[index].getTransformed(perspective);
+                        obj.coords[index]
+                            = obj.cameracoords[index].getTransformed(perspective);
                         // perspective division to create vec2 NDC then finally transform to viewport
                         // clip calculation occurs before the viewport transform
                         vec = obj.coords[index];
@@ -288,7 +304,8 @@ class Scene {
                                     const normal3 = normal.getVector3();
                                     // const worldnormal3 = worldnormal.getVector3();
                                     // Vector3.transformMat4(worldnormal3, normal3, matNormals);
-                                    const worldnormal3 = normal3.getTransformed(matNormals);
+                                    const worldnormal3
+                                        = normal3.getTransformed(matNormals);
                                     worldnormal3.normalize();
                                     poly.worldnormal.set(
                                         worldnormal3[0],

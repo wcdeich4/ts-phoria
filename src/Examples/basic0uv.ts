@@ -8,7 +8,7 @@ import {
 } from '../Phoria';
 import { Vector3, RADIANS } from '../Math';
 
-export default function Example0uv() {
+export default function Example0uv() : void {
     const loader = new ImagePreLoader();
     const bitmaps = [];
     bitmaps.push(new Image(), new Image());
@@ -66,7 +66,16 @@ export default function Example0uv() {
                 x = 0.5;
                 y = 0.5;
             }
-            cube.polygons[i].uvs = [0 + x, 0 + y, 0.5 + x, 0 + y, 0.5 + x, 0.5 + y, 0 + x, 0.5 + y];
+            cube.polygons[i].uvs = [
+                0 + x,
+                0 + y,
+                0.5 + x,
+                0 + y,
+                0.5 + x,
+                0.5 + y,
+                0 + x,
+                0.5 + y,
+            ];
         }
         scene.graph.push(cube);
         const py = MeshFactory.generatePyramid(2);

@@ -1,5 +1,4 @@
 import { Vector3 } from '../Math';
-// eslint-disable-next-line no-unused-vars
 import { Edge, Polygon } from './Interfaces';
 
 function v3(data: {
@@ -181,7 +180,12 @@ export default class MeshFactory {
         };
     }
 
-    static generateSphere(scale, lats, longs, generateUVs: boolean): {
+    static generateSphere(
+        scale: number,
+        lats: number,
+        longs: number,
+        generateUVs: boolean,
+    ): {
         points: Vector3[],
         edges: Edge[],
         polygons: Polygon[],

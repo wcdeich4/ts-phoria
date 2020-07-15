@@ -1,6 +1,4 @@
-/* eslint-disable prefer-destructuring */
 import Vector4 from './Vector4';
-// eslint-disable-next-line no-unused-vars
 import Matrix4 from './Matrix4';
 
 /**
@@ -20,7 +18,7 @@ export default class Vector3 {
      * Get an Vector4 with the x, y and z components of this Vector3.
      * @param w - the w Vector4 component.
      */
-    toVector4(w?: number) {
+    toVector4(w?: number) : Vector4 {
         const v = new Vector4();
         v[0] = this[0];
         v[1] = this[1];

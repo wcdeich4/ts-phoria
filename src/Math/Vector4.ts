@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import Matrix4 from './Matrix4';
 import Vector3 from './Vector3';
 
@@ -105,7 +104,10 @@ export default class Vector4 {
      * @param other - The other Vector4 to calculates the dot product.
      */
     dot(other: Vector4): number {
-        return this[0] * other[0] + this[1] * other[1] + this[2] * other[2] + this[3] * other[3];
+        return this[0] * other[0]
+            + this[1] * other[1]
+            + this[2] * other[2]
+            + this[3] * other[3];
     }
 
     /**
@@ -194,7 +196,7 @@ export default class Vector4 {
      * @param vz - z component.
      * @param vw - w component.
      */
-    static fromValues(vx: number, vy: number, vz: number, vw: number) {
+    static fromValues(vx: number, vy: number, vz: number, vw: number) : Vector4 {
         const v = new Vector4();
         v[0] = vx;
         v[1] = vy;

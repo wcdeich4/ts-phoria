@@ -7,7 +7,7 @@ import {
 } from '../Phoria';
 import { Vector3, RADIANS } from '../Math';
 
-export default function Example0() {
+export default function Example0() : void {
     const canvas = document.getElementById('canvas');
     // create the scene and setup camera, perspective and viewport
     const scene = new Scene();

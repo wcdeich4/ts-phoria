@@ -1,7 +1,5 @@
 import BaseLight from './BaseLight';
-// eslint-disable-next-line no-unused-vars
 import { Vector3, Vector4, Matrix4 } from '../../Math';
-// eslint-disable-next-line no-unused-vars
 import Scene from '../Scene';
 
 export default class PointLight extends BaseLight {
@@ -30,7 +28,7 @@ export default class PointLight extends BaseLight {
         this.onScene(this.transformToScene);
     }
 
-    transformToScene(scene : Scene, matLocal: Matrix4) {
+    transformToScene(scene : Scene, matLocal: Matrix4) : void {
         // update worldposition position of light by local transformation -> world
         const vec = Vector4.fromValues(
             this.position.x,

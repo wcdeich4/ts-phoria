@@ -1,3 +1,4 @@
+import { SceneHandler, BeforeSceneHandler } from './BaseEntity';
 import BaseLight from './BaseLight';
 import { Vector3, Matrix4 } from '../../Math';
 
@@ -21,7 +22,7 @@ export default class DistantLight extends BaseLight {
         this.onScene(this.transformToScene);
     }
 
-    transformToScene() {
+    transformToScene(): void {
         this.worlddirection = Vector3.fromValues(
             -this.direction.x,
             -this.direction.y,
@@ -33,8 +34,8 @@ export default class DistantLight extends BaseLight {
         id?: string | null;
         matrix?: Matrix4 | null;
         children?: [] | null;
-        onBeforeScene?: Function | null;
-        onScene?: Function | null;
+        onBeforeScene?: BeforeSceneHandler | null;
+        onScene?: SceneHandler | null;
         disabled?: boolean | null;
         color?: [number, number, number];
         intensity?: number;

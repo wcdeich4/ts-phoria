@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import { Vector3, Vector4 } from '../../Math';
 
 export default function calcNormalVector(

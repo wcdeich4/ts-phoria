@@ -3,9 +3,9 @@ export default class ImagePreLoader {
 
     callback: (loader: ImagePreLoader) => void = null;
 
-    counter: number = 0;
+    counter = 0;
 
-    addImage(img: HTMLImageElement, url: string) {
+    addImage(img: HTMLImageElement, url: string): void {
         const el = img;
         el.dataset.url = url;
         // attach closure to the image onload handler
@@ -19,7 +19,7 @@ export default class ImagePreLoader {
         this.images.push(el);
     }
 
-    onLoadCallback(fn: (loader: ImagePreLoader) => void) {
+    onLoadCallback(fn: (loader: ImagePreLoader) => void): void {
         this.counter = 0;
         this.callback = fn;
         // load the images

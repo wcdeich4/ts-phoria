@@ -1,10 +1,13 @@
 import CanvasRenderer from './CanvasRenderer';
-import Scene from './Scene';
+import Scene, { CameraHandler } from './Scene';
 import {
     BaseEntity,
+    SceneHandler,
+    BeforeSceneHandler,
     EntityStyle,
     EntityStyleOptional,
     Entity,
+    RenderHandle,
     BaseLight,
     DistantLight,
     PointLight,
@@ -15,12 +18,16 @@ import ImagePreLoader from './ImagePreLoader';
 
 export {
     Scene,
+    CameraHandler,
     CanvasRenderer,
     // Entities
     BaseEntity,
+    SceneHandler,
+    BeforeSceneHandler,
     EntityStyle,
     EntityStyleOptional,
     Entity,
+    RenderHandle,
     BaseLight,
     DistantLight,
     PointLight,

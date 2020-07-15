@@ -1,9 +1,10 @@
-// eslint-disable-next-line no-unused-vars
 import { Polygon, Edge } from '../Interfaces';
-// eslint-disable-next-line no-unused-vars
 import { Vector4 } from '../../Math';
 
-export function sortPolygons(polygons : Polygon[], worldcoords: Vector4[]) {
+export function sortPolygons(
+    polygons : Polygon[],
+    worldcoords: Vector4[],
+) : void {
     polygons.forEach((polygon) => {
         const poly = polygon;
         const { vertices } = poly;
@@ -26,7 +27,7 @@ export function sortPolygons(polygons : Polygon[], worldcoords: Vector4[]) {
     });
 }
 
-export function sortEdges(edges: Edge[], coords: Vector4[]) {
+export function sortEdges(edges: Edge[], coords: Vector4[]) : void {
     edges.forEach((edge, index) => {
         const e = edge;
         e.avz = (coords[edges[index].a][2] + coords[edges[index].b][2]) * 0.5;
@@ -39,7 +40,12 @@ export function sortEdges(edges: Edge[], coords: Vector4[]) {
     });
 }
 
-const qSort = (collectionA: Vector4[], collectionB: Vector4[], start: number, end: number) => {
+const qSort = (
+    collectionA: Vector4[],
+    collectionB: Vector4[],
+    start: number,
+    end: number,
+) => {
     const c = collectionA;
     const a = collectionB;
     // We need our own sort routine as we need to swap items within two lists during the sorting, as
@@ -78,6 +84,6 @@ const qSort = (collectionA: Vector4[], collectionB: Vector4[], start: number, en
     }
 };
 
-export function sortPoints(coords: Vector4[], worldcoords: Vector4[]) {
+export function sortPoints(coords: Vector4[], worldcoords: Vector4[]) : void {
     qSort(worldcoords, coords, 0, coords.length - 1);
 }

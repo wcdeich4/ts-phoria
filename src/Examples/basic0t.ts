@@ -8,7 +8,7 @@ import {
 } from '../Phoria';
 import { Vector3, RADIANS } from '../Math';
 
-export default function Example0t() {
+export default function Example0t() : void {
     const bitmaps = [];
     const loader = new ImagePreLoader();
     for (let i = 0; i < 6; i += 1) {
