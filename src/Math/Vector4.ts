@@ -20,6 +20,15 @@ export default class Vector4 {
         this[3] = 0;
     }
 
+    clone() : Vector4 {
+        const out = new Vector4();
+        out[0] = this[0];
+        out[1] = this[1];
+        out[2] = this[2];
+        out[3] = this[3];
+        return out;
+    }
+
     /**
      * Get a Vector3 with the x, y and z components of this Vector4.
      */

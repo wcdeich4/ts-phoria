@@ -17,6 +17,14 @@ export default class Vector3 {
         this[1] = 0;
         this[2] = 0;
     }
+    
+    clone() : Vector3 {
+        const out = new Vector3();
+        out[0] = this[0];
+        out[1] = this[1];
+        out[2] = this[2];
+        return out;
+    }
 
     /**
      * Get an Vector4 with the x, y and z components of this Vector3.
@@ -148,6 +156,49 @@ export default class Vector3 {
     }
 
     /**
+     * Scales this Vector3 by a scalar number.
+     * @param scalar - Amount to scale the vector by.
+     * @returns Returns this Vector3.
+     */
+    scale(scalar: number) : Vector3 {
+        this[0] *= scalar;
+        this[1] *= scalar;
+        this[2] *= scalar;
+        return this;
+    };
+
+    /**
+     * Adds two Vector3 after scaling the second operand by a scalar value.
+     * @param add - The other Vector3 to add.
+     * @param scale - The scalar factor.
+     * @returns Returns this Vector3.
+     */
+    scaleAndAdd(add: Vector3, scale: number) : Vector3 {
+        this[0] = this[0] + (add[0] * scale);
+        this[1] = this[1] + (add[1] * scale);
+        this[2] = this[2] + (add[2] * scale);
+        return this;
+    }
+
+    /**
+     * Computes the cross product of two Vector3.
+     * @param other - The other Vector3 to computes the cross product.
+     */
+    cross(other: Vector3): Vector3 {
+        const ax = this[0];
+        const ay = this[1];
+        const az = this[2];
+        const bx = other[0];
+        const by = other[1];
+        const bz = other[2];
+        return Vector3.fromValues(
+            ay * bz - az * by,
+            az * bx - ax * bz,
+            ax * by - ay * bx,
+        );
+    }
+
+    /**
      * Subtract the Vector3 b from the Vector3 a and returns it in a new Vector3.
      * @param a - The Vector3 a.
      * @param b - The Vector3 b to subtract from a.
@@ -187,5 +238,17 @@ export default class Vector3 {
         v[1] = vy;
         v[2] = vz;
         return v;
+    }
+
+    /**
+     * Calculates the euclidian distance between two Vector3.
+     * @param a - The first Vector3.
+     * @param b - The second Vector3.
+     */
+    static distance(a : Vector3, b : Vector3) : number {
+        const x = b[0] - a[0];
+        const y = b[1] - a[1];
+        const z = b[2] - a[2];
+        return Math.sqrt(x * x + y * y + z * z);
     }
 }

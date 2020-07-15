@@ -1,6 +1,7 @@
 import Example0 from './basic0';
 import Example0t from './basic0t';
 import Example0uv from './basic0uv';
+import Example0p from './basic0p';
 
 const Examples: {
     [key: string]: () => void;
@@ -9,6 +10,7 @@ const Examples: {
     '0': Example0,
     '0t': Example0t,
     '0uv': Example0uv,
+    '0p': Example0p,
 };
 
 export default Examples;

@@ -15,6 +15,7 @@ import {
 import { Edge, Polygon } from './Interfaces';
 import MeshFactory from './MeshFactory';
 import ImagePreLoader from './ImagePreLoader';
+import View, { MouseTrackingInstance } from './View';
 
 export {
     Scene,
@@ -38,4 +39,6 @@ export {
     // Utils
     MeshFactory,
     ImagePreLoader,
+    View,
+    MouseTrackingInstance,
 };
