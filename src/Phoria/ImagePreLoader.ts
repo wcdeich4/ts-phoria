@@ -1,7 +1,7 @@
 export default class ImagePreLoader {
     images: HTMLImageElement[] = [];
 
-    callback: (loader: ImagePreLoader) => void = null;
+    callback: ((loader: ImagePreLoader) => void) | null = null;
 
     counter = 0;
 
@@ -13,6 +13,9 @@ export default class ImagePreLoader {
             this.counter += 1;
             if (this.counter === this.images.length) {
                 // all images are loaded - execute callback function
+                if (!this.callback) {
+                    return;
+                }
                 this.callback(this);
             }
         };
@@ -25,6 +28,9 @@ export default class ImagePreLoader {
         // load the images
         this.images.forEach((img) => {
             const image = img;
+            if (!img.dataset.url) {
+                return;
+            }
             image.src = img.dataset.url;
         });
     }

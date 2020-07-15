@@ -9,7 +9,7 @@ export default class PointLight extends BaseLight {
         z: number;
     };
 
-    worldPosition: null | Vector3;
+    worldPosition: null | Vector3 = null;
 
     attenuation: 0.1;
 
@@ -28,7 +28,7 @@ export default class PointLight extends BaseLight {
         this.onScene(this.transformToScene);
     }
 
-    transformToScene(scene : Scene, matLocal: Matrix4) : void {
+    transformToScene(scene: Scene, matLocal: Matrix4) : void {
         // update worldposition position of light by local transformation -> world
         const vec = Vector4.fromValues(
             this.position.x,

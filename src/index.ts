@@ -1,22 +1,4 @@
-import CanvasRenderer from './CanvasRenderer';
-import Scene, { CameraHandler, TriggerHandler } from './Scene';
 import {
-    BaseEntity,
-    SceneHandler,
-    BeforeSceneHandler,
-    EntityStyle,
-    EntityStyleOptional,
-    Entity,
-    RenderHandle,
-    BaseLight,
-    DistantLight,
-    PointLight,
-} from './Entity';
-import { Edge, Polygon } from './Interfaces';
-import MeshFactory from './MeshFactory';
-import ImagePreLoader from './ImagePreLoader';
-
-export {
     Scene,
     CameraHandler,
     TriggerHandler,
@@ -38,4 +20,46 @@ export {
     // Utils
     MeshFactory,
     ImagePreLoader,
+} from './Phoria';
+import {
+    // Vector
+    Vector3,
+    Vector4,
+    // Matrix
+    Matrix4,
+    // constants
+    RADIANS,
+    EPSILON,
+    TWOPI,
+} from './Math';
+
+const Math = {
+    Vector3,
+    Vector4,
+    Matrix4,
+    RADIANS,
+    EPSILON,
+    TWOPI,
+};
+
+export {
+    Scene,
+    CameraHandler,
+    TriggerHandler,
+    CanvasRenderer,
+    BaseEntity,
+    SceneHandler,
+    BeforeSceneHandler,
+    EntityStyle,
+    EntityStyleOptional,
+    Entity,
+    RenderHandle,
+    BaseLight,
+    DistantLight,
+    PointLight,
+    Edge,
+    Polygon,
+    MeshFactory,
+    ImagePreLoader,
+    Math,
 };

@@ -9,7 +9,7 @@ import {
 import { Vector3, RADIANS } from '../Math';
 
 export default function Example0t() : void {
-    const bitmaps = [];
+    const bitmaps: HTMLImageElement[] = [];
     const loader = new ImagePreLoader();
     for (let i = 0; i < 6; i += 1) {
         bitmaps.push(new Image());
@@ -18,6 +18,9 @@ export default function Example0t() : void {
     loader.onLoadCallback(() => {
         // get the canvas DOM element and the 2D drawing context
         const canvas = document.getElementById('canvas');
+        if (!canvas) {
+            return;
+        }
         // create the scene and setup camera, perspective and viewport
         const scene = new Scene();
         scene.camera.position = Vector3.fromValues(0, 5, -15);
@@ -61,7 +64,7 @@ export default function Example0t() : void {
                 cube.rotateY(0.5 * RADIANS);
                 // execute the model view 3D pipeline and render the scene
                 scene.modelView();
-                renderer.render(scene, null);
+                renderer.render(scene);
             }
             requestAnimationFrame(fnAnimate);
         };

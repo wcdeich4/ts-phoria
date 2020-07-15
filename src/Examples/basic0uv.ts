@@ -10,13 +10,16 @@ import { Vector3, RADIANS } from '../Math';
 
 export default function Example0uv() : void {
     const loader = new ImagePreLoader();
-    const bitmaps = [];
+    const bitmaps : HTMLImageElement[] = [];
     bitmaps.push(new Image(), new Image());
     loader.addImage(bitmaps[0], 'images/texture-wall.png');
     loader.addImage(bitmaps[1], 'images/texture5.png');
     loader.onLoadCallback(() => {
         // get the canvas DOM element and the 2D drawing context
         const canvas = document.getElementById('canvas');
+        if (!canvas) {
+            return;
+        }
         // create the scene and setup camera, perspective and viewport
         const scene = new Scene();
         scene.camera.position = Vector3.fromValues(0, 20, -25);
@@ -142,7 +145,7 @@ export default function Example0uv() : void {
                 spherePlain.rotateY(0.25 * RADIANS);
                 // execute the model view 3D pipeline and render the scene
                 scene.modelView();
-                renderer.render(scene, null);
+                renderer.render(scene);
             }
             requestAnimationFrame(fnAnimate);
         };

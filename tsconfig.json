@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "CommonJS",
+        "declaration": true,
+        "outDir": "build",
+        "strict": true,
+        "esModuleInterop": true,
+        "noImplicitAny": true
+    },
+    "exclude": [
+        "node_modules",
+        "dist",
+        "build",
+        "images",
+        "src/main.ts",
+        "src/Examples"
+    ]
+}

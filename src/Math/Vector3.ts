@@ -5,6 +5,10 @@ import Matrix4 from './Matrix4';
  * 3 Dimensional Vector.
  */
 export default class Vector3 {
+    0: number;
+    1: number;
+    2: number;
+
     /**
      * Creates a new, empty Vector3.
      */

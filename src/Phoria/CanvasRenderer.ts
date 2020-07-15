@@ -12,8 +12,15 @@ export default class CanvasRenderer extends Renderer {
 
     constructor(canvas: HTMLCanvasElement) {
         super();
+        if (!canvas) {
+            throw new Error('Invalid HTMLCanvasElement!');
+        }
         this.canvas = canvas;
-        this.ctx = this.canvas.getContext('2d');
+        const context = this.canvas.getContext('2d');
+        if (!context) {
+            throw new Error('Invalid HTMLCanvasElement Context!');
+        }
+        this.ctx = context;
     }
 
     render(
@@ -63,7 +70,9 @@ export default class CanvasRenderer extends Renderer {
                 }
             } else if (obj.style.drawmode === 'point') {
                 // assert to ensure that the texture image referenced by the 'sprite' index exists
-                if (obj.style.shademode === 'sprite' && obj.style.sprite !== undefined) {
+                if (obj.style.shademode === 'sprite'
+                    && obj.style.sprite !== undefined
+                    && obj.style.sprite !== null) {
                     if (!obj.textures) {
                         throw new Error('Entity has shademode "sprite" '
                             + 'but no textures defined on parent emitter.');
@@ -170,6 +179,9 @@ export default class CanvasRenderer extends Renderer {
     }
 
     renderPolygon(obj: Entity, scene: Scene, poly: Polygon) : void {
+        if (!poly) {
+            return;
+        }
         const { coords, clip } = obj;
         const { vertices } = poly;
         const color = poly.color || obj.style.color;
@@ -292,7 +304,7 @@ export default class CanvasRenderer extends Renderer {
                 this.ctx.globalAlpha = opacity;
                 this.ctx.drawImage(bitmap, 0, 0);
             };
-            if (fillStyle !== null) {
+            if (fillStyle !== null && rgb !== null) {
                 // convert RGB to grey scale level
                 let alpha = rgb[0] * 0.3 + rgb[1] * 0.6 + rgb[2] * 0.1;
                 if (alpha > 1.0) {

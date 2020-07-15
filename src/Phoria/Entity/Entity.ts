@@ -6,38 +6,54 @@ import { calcNormalVector } from '../Utils';
 
 export type RenderHandle = (
     ctx?: CanvasRenderingContext2D,
-    coordA?: Vector4,
-    coordB?: Vector4,
+    coordA?: number,
+    coordB?: number,
     w?: number
 ) => void;
 
 export default class Entity extends BaseEntity {
-    style: EntityStyle;
+    style: EntityStyle = {
+        color: [128, 128, 128],
+        diffuse: 1.0,
+        specular: 0,
+        drawmode: 'solid',
+        shademode: 'lightsource',
+        fillmode: 'inflate',
+        objectsortmode: 'sorted',
+        geometrysortmode: 'automatic',
+        linewidth: 1.0,
+        linescale: 0.0,
+        opacity: 1.0,
+        doublesided: false,
+        emit: 0.0,
+        texture: null,
+        sprite: null,
+    };
 
-    points: Vector3[];
+    points: Vector3[] = [];
 
-    edges: Edge[];
+    edges: Edge[] = [];
 
-    polygons: Polygon[];
+    polygons: Polygon[] = [];
 
-    onRenderHandlers: RenderHandle[];
+    onRenderHandlers: RenderHandle[] = [];
 
     // buffers
-    worldcoords: Array<Vector4> = null;
+    worldcoords: Array<Vector4> = [];
 
-    cameracoords: Array<Vector4> = null;
+    cameracoords: Array<Vector4> = [];
 
-    coords: Array<Vector4> = null;
+    coords: Array<Vector4> = [];
 
-    clip: Uint32Array = null;
+    clip: Uint32Array = new Uint32Array(0);
 
-    averagez: number;
+    averagez = 0;
 
     textures: HTMLImageElement[] = [];
 
     constructor() {
         super();
-        this.style = Entity.createStyle(null);
+        this.style = Entity.createStyle();
     }
 
     onRender(fn: RenderHandle) : void {
@@ -203,7 +219,9 @@ export default class Entity extends BaseEntity {
         if (desc.children) e.children = desc.children;
         if (desc.onBeforeScene) e.onBeforeScene(desc.onBeforeScene);
         if (desc.onScene) e.onScene(desc.onScene);
-        if (desc.disabled !== undefined) e.disabled = desc.disabled;
+        if (desc.disabled !== null && desc.disabled !== undefined) {
+            e.disabled = desc.disabled;
+        }
         if (desc.points) e.points = desc.points;
         if (desc.polygons) e.polygons = desc.polygons;
         if (desc.edges) e.edges = desc.edges;
@@ -221,7 +239,7 @@ export default class Entity extends BaseEntity {
         return e;
     }
 
-    static createStyle(s: EntityStyleOptional) : EntityStyle {
+    static createStyle(s?: EntityStyleOptional) : EntityStyle {
         let style = {
             color: [128, 128, 128],
             diffuse: 1.0,

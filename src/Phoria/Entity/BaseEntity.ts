@@ -2,15 +2,15 @@ import Scene from '../Scene';
 import { Vector3, Matrix4 } from '../../Math';
 
 export type BeforeSceneHandler =
-    (scene?: Scene, time?: number) => void;
+    (scene: Scene, time: number) => void;
 
 export type SceneHandler =
-    (scene?: Scene, matLocal?: Matrix4, time?: number) => void;
+    (scene: Scene, matLocal: Matrix4, time: number) => void;
 
 export default class BaseEntity {
     matrix: Matrix4 = new Matrix4();
 
-    children: [];
+    children: BaseEntity[] = [];
 
     id: null | string = null;
 

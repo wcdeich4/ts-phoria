@@ -47,10 +47,14 @@ export default class Renderer {
             const light = value;
             let brightness = 0;
             if (light instanceof DistantLight) {
+                const { worldDirection } = light;
+                if (!worldDirection) {
+                    return;
+                }
                 // Distant lights have no "position", just a direction - they light the world with parallel rays
                 // from an infinitely distant location - closest example is light from the sun when overhead
                 // note that light worlddirection is precalculated as negative.
-                const dotVP = normal.dot(light.worlddirection);
+                const dotVP = normal.dot(worldDirection);
                 // don't waste any more time calculating if the dot product is negative i.e. > 90 degrees
                 if (dotVP <= 0) {
                     return;
@@ -58,9 +62,13 @@ export default class Renderer {
                 // combine light intensity with dot product and object diffuse value
                 brightness = dotVP * light.intensity * obj.style.diffuse;
             } else if (light instanceof PointLight) {
+                const { worldPosition } = light;
+                if (!worldPosition) {
+                    return;
+                }
                 // Point lights have a position and a fall-off known as attenuation
                 // distance falloff calculation - each light is additive to the total
-                const vecToLight = Vector3.subtract(position, light.worldPosition);
+                const vecToLight = Vector3.subtract(position, worldPosition);
                 const distance = vecToLight.length();
                 let attenuation = 0;
                 vecToLight.normalize().negate();
@@ -111,7 +119,11 @@ export default class Renderer {
                 brightness = light.intensity;
             } else if (light instanceof PointLight) {
                 // Point lights have a position and a fall-off known as attenuation
-                const vecToLight = Vector3.subtract(position, light.worldPosition);
+                const { worldPosition } = light;
+                if (!worldPosition) {
+                    return;
+                }
+                const vecToLight = Vector3.subtract(position, worldPosition);
                 const distance = vecToLight.length();
                 let attenuation = 0;
                 vecToLight.normalize();
@@ -178,7 +190,7 @@ export default class Renderer {
     ) : Array<[number, number]> {
         const pixels = pixelsInflate || 0.5;
         // generate vertices of parallel edges
-        const pedges = [];
+        const pedges : { x: number; y: number; }[] = [];
         const inflatedVertices = new Array<[number, number]>(vertices.length);
         const j = vertices.length;
         vertices.forEach((vertex, index) => {

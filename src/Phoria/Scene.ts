@@ -13,6 +13,11 @@ export type CameraHandler = (
     lookat : Vector3,
     up: Vector3) => void;
 
+export type TriggerHandler = (
+    cameraPosition: Vector4,
+    lookAt: Vector4,
+    up: Vector4) => boolean;
+
 class Scene {
     camera: {
         /**
@@ -60,23 +65,23 @@ class Scene {
 
     lastTime = 0;
 
-    cameraPosition: Vector4;
+    cameraPosition: Vector4 = Vector4.fromValues(0, 0, 0, 1);
 
-    perspectiveScale: number;
+    perspectiveScale = 1;
 
-    graph: BaseEntity[];
+    graph: BaseEntity[] = [];
 
-    lights: BaseLight[];
+    lights: BaseLight[] = [];
 
-    renderList: Entity[];
+    renderList: Entity[] = [];
 
     triggerHandlers: {
-        trigger: () => boolean;
+        trigger: TriggerHandler;
     }[];
 
     entities: {
         [key: string]: BaseEntity;
-    };
+    } = {};
 
     onCameraHandlers: CameraHandler[] = [];
 
@@ -157,11 +162,16 @@ class Scene {
         // scaling factor used when rendering points to account for perspective fov
         this.perspectiveScale = (256 - this.perspective.fov) / 16;
 
-        const renderList = [];
-        const lights = [];
-        const entityById = {};
+        const renderList : Entity[] = [];
+        const lights : BaseLight[] = [];
+        const entityById : {
+            [key: string]: BaseEntity;
+        } = {};
 
-        const fnProcessEntities = (entities : BaseEntity[], matParent : Matrix4) => {
+        const fnProcessEntities = (
+            entities : BaseEntity[],
+            matParent: Matrix4 | null,
+        ) => {
             entities.forEach((myEntity) => {
                 const obj = myEntity;
                 // check disabled flag for this entity
@@ -300,19 +310,21 @@ class Scene {
                                     }
                                     // normal transformation -> world space
                                     const { normal, worldnormal } = poly;
-                                    // use vec3 to ensure normal directional component is not modified
-                                    const normal3 = normal.getVector3();
-                                    // const worldnormal3 = worldnormal.getVector3();
-                                    // Vector3.transformMat4(worldnormal3, normal3, matNormals);
-                                    const worldnormal3
-                                        = normal3.getTransformed(matNormals);
-                                    worldnormal3.normalize();
-                                    poly.worldnormal.set(
-                                        worldnormal3[0],
-                                        worldnormal3[1],
-                                        worldnormal3[2],
-                                        worldnormal[3],
-                                    );
+                                    if (normal) {
+                                        // use vec3 to ensure normal directional component is not modified
+                                        const normal3 = normal.getVector3();
+                                        // const worldnormal3 = worldnormal.getVector3();
+                                        // Vector3.transformMat4(worldnormal3, normal3, matNormals);
+                                        const worldnormal3
+                                            = normal3.getTransformed(matNormals);
+                                        worldnormal3.normalize();
+                                        poly.worldnormal.set(
+                                            worldnormal3[0],
+                                            worldnormal3[1],
+                                            worldnormal3[2],
+                                            worldnormal[3],
+                                        );
+                                    }
                                 });
                             }
                             // TODO: gouraud?

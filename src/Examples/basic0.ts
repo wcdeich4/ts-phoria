@@ -9,6 +9,9 @@ import { Vector3, RADIANS } from '../Math';
 
 export default function Example0() : void {
     const canvas = document.getElementById('canvas');
+    if (!canvas) {
+        return;
+    }
     // create the scene and setup camera, perspective and viewport
     const scene = new Scene();
     scene.camera.position = Vector3.fromValues(0, 5, -15);
@@ -46,7 +49,7 @@ export default function Example0() : void {
 
             // execute the model view 3D pipeline and render the scene
             scene.modelView();
-            renderer.render(scene, null);
+            renderer.render(scene);
         }
         requestAnimationFrame(fnAnimate);
     };

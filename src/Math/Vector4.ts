@@ -5,6 +5,11 @@ import Vector3 from './Vector3';
  * 4 Dimensional Vector.
  */
 export default class Vector4 {
+    0: number;
+    1: number;
+    2: number;
+    3: number;
+
     /**
      * Creates a new, empty Vector4.
      */

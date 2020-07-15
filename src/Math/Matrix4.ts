@@ -5,6 +5,23 @@ import Vector3 from './Vector3';
  * 4x4 Matrix
  */
 export default class Matrix4 {
+    0: number;
+    1: number;
+    2: number;
+    3: number;
+    4: number;
+    5: number;
+    6: number;
+    7: number;
+    8: number;
+    9: number;
+    10: number;
+    11: number;
+    12: number;
+    13: number;
+    14: number;
+    15: number;
+
     /**
      * Creates a new identity Matrix4.
      */
@@ -269,7 +286,7 @@ export default class Matrix4 {
         let z = axis[2];
         let len = Math.sqrt(x * x + y * y + z * z);
         if (Math.abs(len) < EPSILON) {
-            return null;
+            return this;
         }
         len = 1 / len;
         x *= len;
@@ -436,7 +453,7 @@ export default class Matrix4 {
         // Calculate the determinant
         let det = b00 * b11 - b01 * b10 + b02 * b09 + b03 * b08 - b04 * b07 + b05 * b06;
         if (!det) {
-            return null;
+            return this;
         }
         det = 1.0 / det;
         this[0] = (a11 * b11 - a12 * b10 + a13 * b09) * det;

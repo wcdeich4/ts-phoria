@@ -9,7 +9,7 @@ export default class DistantLight extends BaseLight {
         z: number;
     };
 
-    worlddirection: Vector3 | null;
+    worldDirection: Vector3 | null = null;
 
     constructor() {
         super();
@@ -23,7 +23,7 @@ export default class DistantLight extends BaseLight {
     }
 
     transformToScene(): void {
-        this.worlddirection = Vector3.fromValues(
+        this.worldDirection = Vector3.fromValues(
             -this.direction.x,
             -this.direction.y,
             -this.direction.z,
@@ -47,7 +47,9 @@ export default class DistantLight extends BaseLight {
         if (desc.children) e.children = desc.children;
         if (desc.onBeforeScene) e.onBeforeScene(desc.onBeforeScene);
         if (desc.onScene) e.onScene(desc.onScene);
-        if (desc.disabled !== undefined) e.disabled = desc.disabled;
+        if (desc.disabled !== undefined && desc.disabled !== null) {
+            e.disabled = desc.disabled;
+        }
         if (desc.color) e.color = desc.color;
         if (desc.intensity) e.intensity = desc.intensity;
         if (desc.direction) {
