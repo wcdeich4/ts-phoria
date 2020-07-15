@@ -6,3 +6,4 @@
 - [ ] Add `jsDoc` for all functions in all parts of this code.
 - [x] ImagePreLoader -> Add an "error" handler for not found resources.
 - [ ] Create all original examples (use this for complete other codes not converted for now).
+- [ ] Create Entity Debug method.
