@@ -1,5 +1,5 @@
-import { Vector2, Vector3, Vector4 } from "../../Math";
-import { Polygon } from "../Interfaces";
+import { Vector2, Vector3, Vector4 } from '../../Math';
+import { Polygon } from '../Interfaces';
 
 export function planeLineIntersection(
     planeNormal: Vector3,
@@ -14,16 +14,13 @@ export function planeLineIntersection(
     // giving: lineScalar = planeNormal . (planePoint - linePoint) / planeNormal . lineVector
     const dotProduct = lineVector.dot(planeNormal);
     // check that click vector is not parallel to polygon
-    if (dotProduct !== 0)
-    {
+    if (dotProduct !== 0) {
         const pointVector = Vector3.subtract(planePoint, linePoint);
         const lineScalar = planeNormal.dot(pointVector) / dotProduct;
         const intersection = linePoint.clone();
         intersection.scaleAndAdd(lineVector, lineScalar);
         return intersection;
-    }
-    else
-    {
+    } else {
         // return null if parallel, as the vector will never intersect the plane
         return null;
     }
@@ -33,12 +30,12 @@ export function sectionLineIntersect2D(
     p1: Vector2,
     p2: Vector2,
     p: Vector2,
-    v: Vector2
+    v: Vector2,
 ) : boolean {
     // get line section's vector
     const s = Vector2.subtract(p2, p1);
     // calculate cross product of line vectors
-    var svCross = s.cross(v);
+    const svCross = s.cross(v);
     // if lines are parallel, they will never intersect
     if (svCross[2] === 0) {
         return false;
@@ -50,37 +47,34 @@ export function sectionLineIntersect2D(
     const t = (p[0] * v[1] - p[1] * v[0] - p1[0] * v[1] + p1[1] * v[0]) / svCross[2];
     // if v's x value is 0, use the other equation to calculate scalar u.
     let u = 0;
-    if (v[0] !== 0)
+    if (v[0] !== 0) {
         u = (p1[0] + t * s[0] - p[0]) / v[0];
-    else
+    } else {
         u = (p1[1] + t * s[1] - p[1]) / v[1];
+    }
     // intersection point
     const ip = p1.clone().scaleAndAdd(s, t);
     // check if intersection is in the section line
     const doesIntersect = { x: false, y: false };
     // only check in positive direction of test vector
-    if (u >= 0)
-    {
-        if (p1[0] > p2[0])
-        {
-        if (ip[0] <= p1[0] && ip[0] >= p2[0])
-            doesIntersect.x = true;
+    if (u >= 0) {
+        if (p1[0] > p2[0]) {
+            if (ip[0] <= p1[0] && ip[0] >= p2[0]) {
+                doesIntersect.x = true;
+            }
+        } else {
+            if (ip[0] >= p1[0] && ip[0] <= p2[0]) {
+                doesIntersect.x = true;
+            }
         }
-        else
-        {
-        if (ip[0] >= p1[0] && ip[0] <= p2[0])
-            doesIntersect.x = true;
-        }
-
-        if (p1[1] > p2[1])
-        {
-        if (ip[1] <= p1[1] && ip[1] >= p2[1])
-            doesIntersect.y = true;
-        }
-        else
-        {
-        if (ip[1] >= p1[1] && ip[1] <= p2[1])
-            doesIntersect.y = true;
+        if (p1[1] > p2[1]) {
+            if (ip[1] <= p1[1] && ip[1] >= p2[1]) {
+                doesIntersect.y = true;
+            }
+        } else {
+            if (ip[1] >= p1[1] && ip[1] <= p2[1]) {
+                doesIntersect.y = true;
+            }
         }
     }
     // return true if it is
@@ -110,8 +104,7 @@ export function intersectionInsidePolygon(
         // use orthogonal planes to check if the point is in shape in 2D
         // the component with the highest normal value is dropped
         // as this gives the best approximation of the original shape
-        if (absNormal[2] >= absNormal[0] && absNormal[2] >= absNormal[1])
-        {
+        if (absNormal[2] >= absNormal[0] && absNormal[2] >= absNormal[1]) {
             // drop z coordinates
             point1 = Vector2.fromValues(
                 points[polygon.vertices[l]][0],
@@ -167,7 +160,7 @@ export function intersectionInsidePolygon(
             intersection2D = Vector2.fromValues(intersection[1], intersection[2]);
         }
         if (sectionLineIntersect2D(point1, point2, intersection2D, testVector)) {
-            numIntersects++;
+            numIntersects += 1;
         }
     });
     // uneven number of intersects, mean the point is inside the object

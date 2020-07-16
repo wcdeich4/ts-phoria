@@ -4,7 +4,6 @@ import Example0uv from './basic0uv';
 import Example0p from './basic0p';
 import Example0r from './basic0r';
 
-
 const Examples: {
     [key: string]: () => void;
 } = {

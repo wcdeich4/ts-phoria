@@ -50,7 +50,7 @@ export default class Matrix4 {
     /**
      * Creates a new Matrix4 initialized with values from an existing Matrix4.
      */
-    clone() {
+    clone() : Matrix4 {
         const out = new Matrix4();
 
         out[0] = this[0];

@@ -1,4 +1,4 @@
-import { Vector3 } from ".";
+import Vector3 from './Vector3';
 
 /**
  * 2 Dimensional Vector.
@@ -122,7 +122,7 @@ export default class Vector2 {
         this[0] *= scalar;
         this[1] *= scalar;
         return this;
-    };
+    }
 
     /**
      * Adds two Vector2 after scaling the second operand by a scalar value.

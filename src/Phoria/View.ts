@@ -1,16 +1,28 @@
-import Scene from "./Scene";
+import Scene from './Scene';
 import { Vector2, Vector3 } from '../Math';
 import { planeLineIntersection, intersectionInsidePolygon } from './Utils';
-import { Entity } from "./Entity";
+import { Entity } from './Entity';
 
 export interface MouseTrackingInstance {
+    /**
+     * The final target value from horizontal mouse movement.
+     */
     velocityH: number;
     velocityLastH: number;
     positionX: number;
+    /**
+     * The last mouse click position X.
+     */
     clickPositionX: number;
+    /**
+     * The final target value from vertical mouse movement.
+     */
     velocityV: number;
     velocityLastV: number;
     positionY: number;
+    /**
+     * The last mouse click position Y.
+     */
     clickPositionY: number;
     onMouseMove: ((evt: MouseEvent) => void) | null;
     onMouseUp: ((evt: MouseEvent) => void) | null;
@@ -29,21 +41,21 @@ export default class View {
 
     static addMouseEvents(
         el: HTMLCanvasElement,
-        fnOnClick?: (e: MouseEvent) => any,
+        fnOnClick?: (e: MouseEvent) => void,
     ) : MouseTrackingInstance | null {
         if (!el.id) {
             return null;
         }
         // mouse rotation and position tracking instance
         const mouse : MouseTrackingInstance = {
-            velocityH: 0,        // final target value from horizontal mouse movement 
+            velocityH: 0,
             velocityLastH: 0,
             positionX: 0,
-            clickPositionX: 0,   // last mouse click position
-            velocityV: 0,        // final target value from vertical mouse movement 
+            clickPositionX: 0,
+            velocityV: 0,
             velocityLastV: 0,
             positionY: 0,
-            clickPositionY: 0,    // last mouse click position
+            clickPositionY: 0,
             onMouseMove: null,
             onMouseDown: null,
             onMouseOut: null,
@@ -55,17 +67,19 @@ export default class View {
         };
         mouse.onMouseMove = (evt: MouseEvent) => {
             mouse.positionX = evt.clientX;
-         	mouse.velocityH = mouse.velocityLastH + (mouse.positionX - mouse.clickPositionX) * 0.5;
-         	mouse.positionY = evt.clientY;
-         	mouse.velocityV = mouse.velocityLastV + (mouse.positionY - mouse.clickPositionY) * 0.5;
-        }
-        mouse.onMouseUp = (evt: MouseEvent) => {
+            mouse.velocityH
+                = mouse.velocityLastH + (mouse.positionX - mouse.clickPositionX) * 0.5;
+            mouse.positionY = evt.clientY;
+            mouse.velocityV
+                = mouse.velocityLastV + (mouse.positionY - mouse.clickPositionY) * 0.5;
+        };
+        mouse.onMouseUp = () => {
             if (!mouse.onMouseMove) {
                 return;
             }
             el.removeEventListener('mousemove', mouse.onMouseMove, false);
         };
-        mouse.onMouseOut = function onMouseOut(evt: MouseEvent) {
+        mouse.onMouseOut = function onMouseOut() {
             if (!mouse.onMouseMove) {
                 return;
             }
@@ -93,7 +107,7 @@ export default class View {
 
     static removeMouseEvents(
         el: HTMLCanvasElement,
-        fnOnClick?: (e: MouseEvent) => any,
+        fnOnClick?: (e: MouseEvent) => void,
     ) : void {
         if (!el.id) {
             return;
@@ -148,9 +162,12 @@ export default class View {
             / (camOff.length()
             * Math.tan((scene.perspective.fov / 180 * Math.PI) / 2));
         // calculate world units (from the centre of canvas) corresponding to the mouse click position
-        const dif = Vector2.fromValues(mousex - (scene.viewport.width / 2), mousey - (scene.viewport.height / 2));
+        const dif = Vector2.fromValues(
+            mousex - (scene.viewport.width / 2),
+            mousey - (scene.viewport.height / 2),
+        );
         dif.subtract(Vector2.fromValues(8, 8)); // calibrate
-        const units = Vector2.fromValues(dif[0], dif[1]).scale(1 / pixelsPerUnit);        
+        const units = Vector2.fromValues(dif[0], dif[1]).scale(1 / pixelsPerUnit);
         // move click point horizontally on click plane by the number of units calculated from the x offset of the mouse click
         const upVector = scene.camera.up.clone();
         const normalVectorSide = camOff.cross(upVector).normalize();
@@ -168,7 +185,11 @@ export default class View {
         };
     }
 
-    static getIntersectedObjects(scene: Scene, clickPoint: Vector3, clickVector: Vector3) : {
+    static getIntersectedObjects(
+        scene: Scene,
+        clickPoint: Vector3,
+        clickVector: Vector3,
+    ) : {
         entity: Entity;
         polygonIndex: number;
         intersectionPoint: Vector3;
@@ -180,7 +201,6 @@ export default class View {
             intersectionPoint: Vector3;
             distance: number;
         }[] = [];
-        //obj, polygonNormal, polygonPoint, polygonCoords, polygonPlaneIntersection, pointVector;
         // Go through all the appropriate objects
         scene.renderList.forEach((renderItem) => {
             const obj = renderItem;
@@ -206,7 +226,7 @@ export default class View {
                 if (intersectionInsidePolygon(
                     obj.polygons[m],
                     obj.worldcoords,
-                    polygonPlaneIntersection
+                    polygonPlaneIntersection,
                 )) {
                     const returnObject = {
                         entity: obj,
@@ -220,23 +240,19 @@ export default class View {
         });
         // calculate distance to each intersection from camera's position
         const cameraPos = scene.cameraPosition.getVector3();
-        for (let i = 0; i < intersections.length; i++)
-        {
+        for (let i = 0; i < intersections.length; i += 1) {
             intersections[i].distance = Vector3.distance(
                 cameraPos,
                 intersections[i].intersectionPoint,
             );
         }
         // sort intersection points from closest to farthest
-        for (var i = 0; i < intersections.length - 1; i++)
-        {
-            for (var j = i + 1, keepVal; j < intersections.length; j++)
-            {
-                if (intersections[i].distance >= intersections[j].distance)
-                {
-                keepVal = intersections[j];
-                intersections[j] = intersections[i];
-                intersections[i] = keepVal;
+        for (let i = 0; i < intersections.length - 1; i += 1) {
+            for (let j = i + 1, keepVal; j < intersections.length; j += 1) {
+                if (intersections[i].distance >= intersections[j].distance) {
+                    keepVal = intersections[j];
+                    intersections[j] = intersections[i];
+                    intersections[i] = keepVal;
                 }
             }
         }

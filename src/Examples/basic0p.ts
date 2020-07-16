@@ -22,62 +22,62 @@ export default function Example0p() : void {
 
     // create a canvas renderer
     const renderer = new CanvasRenderer(canvas as HTMLCanvasElement);
-    
+
     // add a grid to help visualise camera position etc.
-    var plane = MeshFactory.generateTesselatedPlane(8, 8, 0, 20, false);
+    const plane = MeshFactory.generateTesselatedPlane(8, 8, 0, 20, false);
     scene.graph.push(Entity.create({
         points: plane.points,
         edges: plane.edges,
         polygons: plane.polygons,
         style: {
-            shademode: "plain",
-            drawmode: "wireframe",
+            shademode: 'plain',
+            drawmode: 'wireframe',
             linewidth: 0.5,
-            objectsortmode: "back",
+            objectsortmode: 'back',
         },
     }));
-    
-    var c1 = MeshFactory.generateUnitCube(1);
-    var cube1 = Entity.create({
-        id: "Cube Red",
+
+    const c1 = MeshFactory.generateUnitCube(1);
+    const cube1 = Entity.create({
+        id: 'Cube Red',
         points: c1.points,
         polygons: c1.polygons,
         style: {
-            color: [120, 0, 0]
+            color: [120, 0, 0],
         },
     });
     cube1.scaleN(1.25).rotateY(0.5).translateX(3);
     scene.graph.push(cube1);
-    
-    var c2 = MeshFactory.generateUnitCube(1);
-    var cube2 = Entity.create({
-        id: "Cube Blue",
+
+    const c2 = MeshFactory.generateUnitCube(1);
+    const cube2 = Entity.create({
+        id: 'Cube Blue',
         points: c2.points,
         polygons: c2.polygons,
         style: {
-            color: [0, 0, 120]
-        }
+            color: [0, 0, 120],
+        },
     });
     cube2.rotateY(1.5).translateZ(-4);
     scene.graph.push(cube2);
-    
-    var c3 = MeshFactory.generateUnitCube(1);
-    var cube3 = Entity.create({
-        id: "Cube Green",
+
+    const c3 = MeshFactory.generateUnitCube(1);
+    const cube3 = Entity.create({
+        id: 'Cube Green',
         points: c3.points,
         edges: c3.edges,
         polygons: c3.polygons,
         style: {
-            color: [0, 120, 0]
-        }
+            color: [0, 120, 0],
+        },
     });
     cube3.scaleN(0.7).rotateX(0.8).translateY(3);
     scene.graph.push(cube3);
-    
+
     // add a light
     scene.graph.push(DistantLight.create({
         direction: Vector3.fromValues(0, -0.5, 1),
-        intensity: 1.25
+        intensity: 1.25,
     }));
 
     // mouse rotation and position tracking
@@ -85,7 +85,7 @@ export default function Example0p() : void {
     const lastColor: {
         [key: string]: number[];
     } = {};
-    const picked = document.getElementById("picked");
+    const picked = document.getElementById('picked');
     if (!picked) {
         return;
     }
@@ -104,46 +104,42 @@ export default function Example0p() : void {
             cpv.clickPoint,
             cpv.clickVector,
         );
-        picked.innerHTML = "Selected: " + (intersects.length !== 0 ? intersects[0].entity.id : "[none]");
-        if (lastPicked !== null)
-        {
+        const pickedId = (intersects.length !== 0 ? intersects[0].entity.id : '[none]');
+        picked.innerHTML = `Selected: ${pickedId}`;
+        if (lastPicked !== null) {
             if (lastPicked.id !== null) {
                 lastPicked.style.color = lastColor[lastPicked.id];
                 lastPicked.style.emit = 0;
                 lastPicked = null;
             }
         }
-        if (intersects.length !== 0)
-        {
-            var obj = intersects[0].entity;
+        if (intersects.length !== 0) {
+            const obj = intersects[0].entity;
             if (obj.id !== null) {
                 lastColor[obj.id] = obj.style.color;
-                obj.style.color = [255,255,255];
+                obj.style.color = [255, 255, 255];
                 obj.style.emit = 0.5;
                 lastPicked = obj;
                 setTimeout(function() {
-                    if (lastPicked !== null)
-                    {
+                    if (lastPicked !== null) {
                         if (lastPicked.id !== null) {
                             lastPicked.style.color = lastColor[lastPicked.id];
                             lastPicked.style.emit = 0;
                             lastPicked = null;
                         }
                     }
-                },300);
+                }, 300);
             }
         }
     });
 
     let pause = false;
     const fnAnimate = () => {
-        if (!pause)
-        {
+        if (!pause) {
             // rotate cubes
             cube1.rotateY(0.5 * RADIANS);
             cube2.rotateX(0.5 * RADIANS);
             cube3.rotateZ(0.5 * RADIANS);
-            
             // execute the model view 3D pipeline and render the scene
             scene.modelView();
             renderer.render(scene);

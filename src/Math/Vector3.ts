@@ -17,7 +17,7 @@ export default class Vector3 {
         this[1] = 0;
         this[2] = 0;
     }
-    
+
     clone() : Vector3 {
         const out = new Vector3();
         out[0] = this[0];
@@ -165,7 +165,7 @@ export default class Vector3 {
         this[1] *= scalar;
         this[2] *= scalar;
         return this;
-    };
+    }
 
     /**
      * Adds two Vector3 after scaling the second operand by a scalar value.
