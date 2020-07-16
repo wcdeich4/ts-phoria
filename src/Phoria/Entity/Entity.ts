@@ -5,10 +5,10 @@ import { Polygon, Edge } from '../Interfaces';
 import { calcNormalVector } from '../Utils';
 
 export type RenderHandle = (
-    ctx?: CanvasRenderingContext2D,
-    coordA?: number,
-    coordB?: number,
-    w?: number
+    ctx: CanvasRenderingContext2D,
+    coordA: number,
+    coordB: number,
+    w: number
 ) => void;
 
 export default class Entity extends BaseEntity {
@@ -145,6 +145,114 @@ export default class Entity extends BaseEntity {
             maxx,
             maxy,
         };
+    }
+
+    static debug(entity : Entity, config : {
+        showId?: boolean;
+        showAxis?: boolean;
+        showPosition?: boolean;
+    }) : void {
+        // search child list for debug entity
+        const displayId = (entity.id ? (` ${entity.id}`) : '');
+        const id = `Phoria.Debug${displayId}`;
+        let debugEntity : Entity | null = null;
+        for (let i = 0; i < entity.children.length; i += 1) {
+            const child = entity.children[i];
+            if (child instanceof Entity && child.id === id) {
+                debugEntity = child;
+                break;
+            }
+        }
+        // create debug entity if it does not exist
+        if (!debugEntity) {
+            // add a child entity with a custom renderer - that renders text of the parent id at position
+            debugEntity = new Entity();
+            debugEntity.id = id;
+            debugEntity.points = [
+                Vector3.fromValues(0, 0, 0),
+            ];
+            debugEntity.style = {
+                ...debugEntity.style,
+                drawmode: 'point',
+                shademode: 'callback',
+                geometrysortmode: 'none',
+                objectsortmode: 'front', // force render on-top of everything else
+            };
+            debugEntity.onRender((ctx, x, y) => {
+                if (!debugEntity) {
+                    return;
+                }
+                // render debug text
+                ctx.fillStyle = '#333';
+                ctx.font = '14pt Helvetica';
+                let textPos = y;
+                if (config.showId) {
+                    ctx.fillText(
+                        entity.id ? entity.id : 'unknown - set Entity "id" property',
+                        x,
+                        textPos,
+                    );
+                    textPos += 16;
+                }
+                if (config.showPosition) {
+                    // const p = entity.worldposition ? entity.worldposition : theDebugEntity.worldcoords[0];
+                    const p = debugEntity.worldcoords[0];
+                    const px = p[0].toFixed(2);
+                    const py = p[1].toFixed(2);
+                    const pz = p[2].toFixed(2);
+                    ctx.fillText(
+                        `{x: ${px}, y: ${py}, z: ${pz}}`,
+                        x,
+                        textPos,
+                    );
+                }
+            });
+            entity.children.push(debugEntity);
+            // add visible axis geometry (lines) as children of entity for showAxis
+            const fnCreateAxis = (
+                vector: Vector3,
+                color: [number, number, number],
+            ) => {
+                const axisEntity = new Entity();
+                axisEntity.points = [
+                    Vector3.fromValues(0, 0, 0),
+                    Vector3.fromValues(2 * vector[0], 2 * vector[1], 2 * vector[2]),
+                ];
+                axisEntity.edges = [
+                    { a: 0, b: 1, avz: 0 },
+                ];
+                axisEntity.style = {
+                    ...axisEntity.style,
+                    drawmode: 'wireframe',
+                    shademode: 'plain',
+                    geometrysortmode: 'none',
+                    objectsortmode: 'front',
+                    linewidth: 2.0,
+                    color: color,
+                };
+                axisEntity.disabled = true;
+                return axisEntity;
+            };
+            // X
+            debugEntity.children.push(fnCreateAxis(
+                Vector3.fromValues(1, 0, 0),
+                [255, 0, 0],
+            ));
+            // Y
+            debugEntity.children.push(fnCreateAxis(
+                Vector3.fromValues(0, 1, 0),
+                [0, 255, 0],
+            ));
+            // Z
+            debugEntity.children.push(fnCreateAxis(
+                Vector3.fromValues(0, 0, 1),
+                [0, 0, 255],
+            ));
+        }
+        // set the config
+        for (let i = 0; i < debugEntity.children.length; i += 1) {
+            debugEntity.children[i].disabled = !config.showAxis;
+        }
     }
 
     getWorldBounds() : {

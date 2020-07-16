@@ -45,11 +45,9 @@ export default function Example0r() : void {
         cube.polygons[i].color = [42 * i, 256 - (42 * i), (128 + (42 * i)) % 256];
     }
     scene.graph.push(cube);
-    /*
-    Phoria.Entity.debug(cube, {
-        showAxis: true
+    Entity.debug(cube, {
+        showAxis: true,
     });
-    */
     // add a light
     scene.graph.push(DistantLight.create({
         direction: Vector3.fromValues(0, -0.5, 1),
