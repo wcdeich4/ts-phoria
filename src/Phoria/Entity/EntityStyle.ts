@@ -1,5 +1,5 @@
 export interface EntityStyle {
-    color: number[];
+    color: [number, number, number];
     diffuse: number;
     specular: number;
     drawmode: 'solid' | 'wireframe' | 'point';
@@ -18,7 +18,7 @@ export interface EntityStyle {
 }
 
 export interface EntityStyleOptional {
-    color?: number[];
+    color?: [number, number, number];
     diffuse?: number;
     specular?: number;
     drawmode?: 'solid' | 'wireframe' | 'point';

@@ -83,7 +83,7 @@ export default function Example0p() : void {
     // mouse rotation and position tracking
     let lastPicked : Entity | null = null;
     const lastColor: {
-        [key: string]: number[];
+        [key: string]: [number, number, number];
     } = {};
     const picked = document.getElementById('picked');
     if (!picked) {

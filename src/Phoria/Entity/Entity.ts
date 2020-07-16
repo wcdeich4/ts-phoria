@@ -255,6 +255,7 @@ export default class Entity extends BaseEntity {
             doublesided: false,
             emit: 0.0,
             texture: null,
+            sprite: null,
         } as EntityStyle;
         if (s) {
             style = {
