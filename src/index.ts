@@ -35,6 +35,7 @@ import {
     EPSILON,
     TWOPI,
 } from './Math';
+import * as PhoriaUtil from './Phoria/Utils';
 
 export {
     // Vector
@@ -67,4 +68,5 @@ export {
     ImagePreLoader,
     View,
     MouseTrackingInstance,
+    PhoriaUtil,
 };
