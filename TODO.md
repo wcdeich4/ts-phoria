@@ -6,5 +6,6 @@
 - [ ] Add `jsDoc` for all functions in all parts of this code.
 - [x] ImagePreLoader -> Add an "error" handler for not found resources.
 - [ ] Create all original examples (use this for complete other codes not converted for now).
+Obs: the example with obj loader will not be created.
 - [x] Create Entity Debug method (and complete the example of picking).
 - [ ] Make all Vector2/3/4 with same functions.
