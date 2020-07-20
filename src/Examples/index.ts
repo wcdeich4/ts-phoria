@@ -4,6 +4,7 @@ import Example0uv from './basic0uv';
 import Example0p from './basic0p';
 import Example0r from './basic0r';
 import Example0k from './basic0k';
+import Example1 from './basic1';
 
 const Examples: {
     [key: string]: () => void;
@@ -15,6 +16,8 @@ const Examples: {
     '0p': Example0p,
     '0r': Example0r,
     '0k': Example0k,
+    // eslint-disable-next-line quote-props
+    '1': Example1,
 };
 
 export default Examples;
