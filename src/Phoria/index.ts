@@ -5,4 +5,4 @@ export * from './Interfaces';
 export * from './MeshFactory';
 export * from './ImagePreLoader';
 export * from './View';
-export * from './Utils';
+export * as Utils from './Utils';

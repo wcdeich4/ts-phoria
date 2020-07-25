@@ -1,6 +1,6 @@
 {
   "name": "ts-phoria",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Phoria canvas 3d rendering converted to TypeScript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
