@@ -1,7 +1,7 @@
 {
   "name": "ts-phoria",
-  "version": "0.1.0",
-  "description": "",
+  "version": "0.1.3",
+  "description": "Phoria canvas 3d rendering converted to TypeScript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -9,8 +9,13 @@
     "build": "tsc"
   },
   "keywords": [],
-  "author": "Kevin Roast <kevtoast@yahoo.com> | Eduardo Oliveira <eduardo_y05@outlook.com>",
-  "license": "MIT",
+  "phoriaAuthor": "Kevin Roast <kevtoast@yahoo.com> (http://www.kevs3d.co.uk/)",
+  "author": "Eduardo Oliveira <eduardo_y05@outlook.com> (https://eduardojm.github.io/en/)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EduardoJM/ts-phoria"
+  },
+  "license": "BSD 3-Clause",
   "files": [
     "dist"
   ],

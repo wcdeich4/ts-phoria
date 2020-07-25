@@ -1,27 +1,16 @@
 import {
     Scene,
-    CameraHandler,
-    TriggerHandler,
     CanvasRenderer,
     // Entities
     BaseEntity,
-    SceneHandler,
-    BeforeSceneHandler,
-    EntityStyle,
-    EntityStyleOptional,
     Entity,
-    RenderHandle,
     BaseLight,
     DistantLight,
     PointLight,
-    // Interfaces
-    Edge,
-    Polygon,
     // Utils
     MeshFactory,
     ImagePreLoader,
     View,
-    MouseTrackingInstance,
 } from './Phoria';
 import {
     // Vector
@@ -35,9 +24,9 @@ import {
     EPSILON,
     TWOPI,
 } from './Math';
-import * as PhoriaUtil from './Phoria/Utils';
+import * as Util from './Phoria/Utils';
 
-export {
+const Phoria = {
     // Vector
     Vector2,
     Vector3,
@@ -49,24 +38,29 @@ export {
     EPSILON,
     TWOPI,
     Scene,
-    CameraHandler,
-    TriggerHandler,
     CanvasRenderer,
     BaseEntity,
-    SceneHandler,
-    BeforeSceneHandler,
-    EntityStyle,
-    EntityStyleOptional,
     Entity,
-    RenderHandle,
     BaseLight,
     DistantLight,
     PointLight,
-    Edge,
-    Polygon,
     MeshFactory,
     ImagePreLoader,
     View,
-    MouseTrackingInstance,
-    PhoriaUtil,
+    Util,
 };
+
+export {
+    CameraHandler,
+    TriggerHandler,
+    MouseTrackingInstance,
+    Edge,
+    Polygon,
+    RenderHandle,
+    EntityStyle,
+    EntityStyleOptional,
+    SceneHandler,
+    BeforeSceneHandler,
+} from './Phoria';
+
+export default Phoria;
