@@ -1,11 +1,11 @@
-import Renderer from './Renderer';
-import Scene from './Scene';
+import { Renderer } from './Renderer';
+import { Scene } from './Scene';
 import { Entity } from './Entity';
 import { Polygon, Edge } from './Interfaces';
 import { Vector3, Vector4, TWOPI } from '../Math';
 import { averagePolyVertex } from './Utils';
 
-export default class CanvasRenderer extends Renderer {
+export class CanvasRenderer extends Renderer {
     canvas: HTMLCanvasElement;
 
     ctx: CanvasRenderingContext2D;

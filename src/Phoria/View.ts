@@ -1,4 +1,4 @@
-import Scene from './Scene';
+import { Scene } from './Scene';
 import { Vector2, Vector3 } from '../Math';
 import { planeLineIntersection, intersectionInsidePolygon } from './Utils';
 import { Entity } from './Entity';
@@ -30,7 +30,7 @@ export interface MouseTrackingInstance {
     onMouseDown: ((evt: MouseEvent) => void) | null;
 }
 
-export default class View {
+export class View {
     constructor() {
         throw new Error('The View class not instantiable.');
     }

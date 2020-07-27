@@ -28,7 +28,7 @@ function p(data: {
     } as Polygon;
 }
 
-export default class MeshFactory {
+export class MeshFactory {
     constructor() {
         throw new Error('MeshFactory can not be instantiated');
     }

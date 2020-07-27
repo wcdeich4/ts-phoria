@@ -1,4 +1,4 @@
-export default class ImagePreLoader {
+export class ImagePreLoader {
     images: HTMLImageElement[] = [];
 
     callback: ((loader: ImagePreLoader) => void) | null = null;

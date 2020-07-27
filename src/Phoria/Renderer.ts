@@ -1,4 +1,4 @@
-import Scene from './Scene';
+import { Scene } from './Scene';
 import { Vector3, Vector4, EPSILON } from '../Math';
 import {
     Entity,
@@ -7,7 +7,7 @@ import {
     PointLight,
 } from './Entity';
 
-export default class Renderer {
+export class Renderer {
     sort = true;
 
     sortObjects(scene: Scene) : void {

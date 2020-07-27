@@ -1,7 +1,7 @@
 import BaseLight from './BaseLight';
 import { SceneHandler, BeforeSceneHandler } from './BaseEntity';
 import { Vector3, Vector4, Matrix4 } from '../../Math';
-import Scene from '../Scene';
+import { Scene } from '../Scene';
 
 export default class PointLight extends BaseLight {
     position: {

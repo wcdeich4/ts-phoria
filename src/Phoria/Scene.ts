@@ -18,7 +18,7 @@ export type TriggerHandler = (
     lookAt: Vector4,
     up: Vector4) => boolean;
 
-class Scene {
+export class Scene {
     camera: {
         /**
          * up vector.
@@ -359,5 +359,3 @@ class Scene {
         });
     }
 }
-
-export default Scene;

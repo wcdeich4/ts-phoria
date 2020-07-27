@@ -1,4 +1,4 @@
-import Scene from '../Scene';
+import { Scene } from '../Scene';
 import { Vector3, Matrix4 } from '../../Math';
 
 export type BeforeSceneHandler =
