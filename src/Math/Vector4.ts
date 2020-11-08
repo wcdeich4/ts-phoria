@@ -20,6 +20,9 @@ export default class Vector4 {
         this[3] = 0;
     }
 
+    /**
+     * Clone this Vector4 to another.
+     */
     clone() : Vector4 {
         const out = new Vector4();
         out[0] = this[0];

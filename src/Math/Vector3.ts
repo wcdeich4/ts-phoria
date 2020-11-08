@@ -1,4 +1,5 @@
 import Vector4 from './Vector4';
+import Vector2 from './Vector2';
 import Matrix4 from './Matrix4';
 
 /**
@@ -18,12 +19,27 @@ export default class Vector3 {
         this[2] = 0;
     }
 
+    /**
+     * Clone this Vector3 to another.
+     */
     clone() : Vector3 {
         const out = new Vector3();
         out[0] = this[0];
         out[1] = this[1];
         out[2] = this[2];
         return out;
+    }
+
+    /**
+     * Get a Vector2 with the x and y components of this Vector3.
+     */
+    getVector2() : Vector2 {
+        const v = new Vector2();
+        const x = this[0];
+        const y = this[1];
+        v[0] = x;
+        v[1] = y;
+        return v;
     }
 
     /**

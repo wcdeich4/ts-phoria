@@ -1,4 +1,5 @@
 import Vector3 from './Vector3';
+import Vector4 from './Vector4';
 
 /**
  * 2 Dimensional Vector.
@@ -15,11 +16,40 @@ export default class Vector2 {
         this[1] = 0;
     }
 
+    /**
+     * Clone this Vector2 to another.
+     */
     clone() : Vector2 {
         const out = new Vector2();
         out[0] = this[0];
         out[1] = this[1];
         return out;
+    }
+
+    /**
+     * Get an Vector3 with the x and y components of this Vector2.
+     * @param z - the z Vector3 component.
+     */
+    toVector3(z?: number) : Vector3 {
+        const v = new Vector3();
+        v[0] = this[0];
+        v[1] = this[1];
+        v[2] = z || 0;
+        return v;
+    }
+
+    /**
+     * Get an Vector4 with the x and y components of this Vector2.
+     * @param z - the z Vector4 component.
+     * @param w - the w Vector4 component.
+     */
+    toVector4(z?: number, w?: number) : Vector4 {
+        const v = new Vector4();
+        v[0] = this[0];
+        v[1] = this[1];
+        v[2] = z || 0;
+        v[3] = w || 0;
+        return v;
     }
 
     /**
