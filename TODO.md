@@ -8,4 +8,3 @@
 - [ ] Create all original examples (use this for complete other codes not converted for now).
 Obs: the example with obj loader will not be created. The examples using SoftwareRenderer will not be created.
 - [x] Create Entity Debug method (and complete the example of picking).
-
