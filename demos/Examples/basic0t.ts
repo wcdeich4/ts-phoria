@@ -5,8 +5,8 @@ import {
     DistantLight,
     MeshFactory,
     ImagePreLoader,
-} from '../Phoria';
-import { Vector3, RADIANS } from '../Math';
+} from '../../src/Phoria';
+import { Vector3, RADIANS } from '../../src/Math';
 
 export default function Example0t() : void {
     const bitmaps: HTMLImageElement[] = [];

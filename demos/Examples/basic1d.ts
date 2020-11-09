@@ -4,8 +4,8 @@ import {
     Entity,
     PointLight,
     MeshFactory,
-} from '../Phoria';
-import { Vector3, RADIANS } from '../Math';
+} from '../../src/Phoria';
+import { Vector3, RADIANS } from '../../src/Math';
 
 export default function Example1d() : void {
     const canvas = document.getElementById('canvas');

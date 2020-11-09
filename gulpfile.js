@@ -8,17 +8,17 @@ const uglify = require('gulp-uglify');
 gulp.task('browserify', () => browserify({
     basedir: '.',
     debug: true,
-    entries: ['src/demo.ts'],
+    entries: ['demos/index.ts'],
     cache: {},
     packageCache: {},
 })
     .plugin(tsify)
     .bundle()
     .pipe(source('bundle.js'))
-    .pipe(gulp.dest('docs/dist')));
+    .pipe(gulp.dest('demos/web/dist')));
 
-gulp.task('minify', () => gulp.src('docs/dist/bundle.js')
+gulp.task('minify', () => gulp.src('demos/web/dist/bundle.js')
     .pipe(uglify())
-    .pipe(gulp.dest('./docs/dist/min')));
+    .pipe(gulp.dest('./demos/web/dist/min')));
 
 gulp.task('examples', gulp.series('browserify', 'minify', (done) => done()));

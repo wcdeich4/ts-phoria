@@ -6,7 +6,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "ex": "gulp examples",
-    "build": "tsc"
+    "build": "tsc",
+    "docs": "typedoc --out docs/ src/ --mode file"
   },
   "keywords": [],
   "phoriaAuthor": "Kevin Roast <kevtoast@yahoo.com> (http://www.kevs3d.co.uk/)",
@@ -21,6 +22,7 @@
   ],
   "husky": {
     "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
@@ -44,6 +46,7 @@
     "gulp-uglify": "^3.0.2",
     "husky": "^4.3.0",
     "tsify": "^4.0.2",
+    "typedoc": "^0.19.2",
     "typescript": "^3.9.6",
     "vinyl-source-stream": "^2.0.0"
   },

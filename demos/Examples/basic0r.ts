@@ -5,8 +5,8 @@ import {
     DistantLight,
     MeshFactory,
     View,
-} from '../Phoria';
-import { Vector3, RADIANS } from '../Math';
+} from '../../src/Phoria';
+import { Vector3, RADIANS } from '../../src/Math';
 
 export default function Example0r() : void {
     const canvas = document.getElementById('canvas');

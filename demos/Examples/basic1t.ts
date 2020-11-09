@@ -5,8 +5,8 @@ import {
     PointLight,
     MeshFactory,
     ImagePreLoader,
-} from '../Phoria';
-import { Vector3, RADIANS } from '../Math';
+} from '../../src/Phoria';
+import { Vector3, RADIANS } from '../../src/Math';
 
 export default function Example1t() : void {
     const bitmaps: HTMLImageElement[] = [];
