@@ -22,7 +22,9 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">ts-phoria</a>
+					<a href="../index.html" class="title">
+						TypeScript Phoria
+					</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -38,10 +40,6 @@
 							</div>
 							<input type="checkbox" id="tsd-filter-inherited" checked />
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-externals" checked />
-							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
-							<input type="checkbox" id="tsd-filter-only-exported" />
-							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -66,6 +64,20 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>A static class that contains some helper methods to create some meshs.</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>remark</dt>
+						<dd><p>If you try to instantiate this class, like:</p>
+							<pre><code class="language-typescript"><span class="hljs-keyword">const</span> a = <span class="hljs-keyword">new</span> MeshFactory();</code></pre>
+							<p>the code will trown an <code>Error</code> with the message: &quot;MeshFactory can not be instantiated&quot;.</p>
+						</dd>
+					</dl>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -78,12 +90,6 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
-							<h3>Constructors</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="meshfactory.html#constructor" class="tsd-kind-icon">constructor</a></li>
-							</ul>
-						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
@@ -99,26 +105,6 @@
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
-					<a name="constructor" class="tsd-anchor"></a>
-					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Mesh<wbr>Factory<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="meshfactory.html" class="tsd-signature-type">MeshFactory</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/EduardoJM/ts-phoria/blob/f8627e6/src/Phoria/MeshFactory.ts#L31">Phoria/MeshFactory.ts:31</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="meshfactory.html" class="tsd-signature-type">MeshFactory</a></h4>
-						</li>
-					</ul>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
 					<a name="generateicosahedron" class="tsd-anchor"></a>
@@ -130,7 +116,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/EduardoJM/ts-phoria/blob/f8627e6/src/Phoria/MeshFactory.ts#L289">Phoria/MeshFactory.ts:289</a></li>
+									<li>Defined in <a href="https://github.com/EduardoJM/ts-phoria/blob/fcb95f5/src/Phoria/MeshFactory.ts#L332">Phoria/MeshFactory.ts:332</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -164,7 +150,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/EduardoJM/ts-phoria/blob/f8627e6/src/Phoria/MeshFactory.ts#L149">Phoria/MeshFactory.ts:149</a></li>
+									<li>Defined in <a href="https://github.com/EduardoJM/ts-phoria/blob/fcb95f5/src/Phoria/MeshFactory.ts#L192">Phoria/MeshFactory.ts:192</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -198,7 +184,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/EduardoJM/ts-phoria/blob/f8627e6/src/Phoria/MeshFactory.ts#L183">Phoria/MeshFactory.ts:183</a></li>
+									<li>Defined in <a href="https://github.com/EduardoJM/ts-phoria/blob/fcb95f5/src/Phoria/MeshFactory.ts#L226">Phoria/MeshFactory.ts:226</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -241,7 +227,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/EduardoJM/ts-phoria/blob/f8627e6/src/Phoria/MeshFactory.ts#L78">Phoria/MeshFactory.ts:78</a></li>
+									<li>Defined in <a href="https://github.com/EduardoJM/ts-phoria/blob/fcb95f5/src/Phoria/MeshFactory.ts#L121">Phoria/MeshFactory.ts:121</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -281,31 +267,58 @@
 					<a name="generateunitcube" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> generate<wbr>Unit<wbr>Cube</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">generate<wbr>Unit<wbr>Cube<span class="tsd-signature-symbol">(</span>scale<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>edges<span class="tsd-signature-symbol">: </span><a href="../interfaces/edge.html" class="tsd-signature-type">Edge</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>points<span class="tsd-signature-symbol">: </span><a href="vector3.html" class="tsd-signature-type">Vector3</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>polygons<span class="tsd-signature-symbol">: </span><a href="../interfaces/polygon.html" class="tsd-signature-type">Polygon</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span></li>
+						<li class="tsd-signature tsd-kind-icon">generate<wbr>Unit<wbr>Cube<span class="tsd-signature-symbol">(</span>scale<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>edges<span class="tsd-signature-symbol">: </span><a href="../interfaces/edge.html" class="tsd-signature-type">Edge</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>points<span class="tsd-signature-symbol">: </span><a href="vector3.html" class="tsd-signature-type">Vector3</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>polygons<span class="tsd-signature-symbol">: </span><a href="../interfaces/polygon.html" class="tsd-signature-type">Polygon</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/EduardoJM/ts-phoria/blob/f8627e6/src/Phoria/MeshFactory.ts#L36">Phoria/MeshFactory.ts:36</a></li>
+									<li>Defined in <a href="https://github.com/EduardoJM/ts-phoria/blob/fcb95f5/src/Phoria/MeshFactory.ts#L76">Phoria/MeshFactory.ts:76</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Generate an &quot;unitary&quot; cube.</p>
+								</div>
+								<p>The code above will create a cube with 1 x 1 x 1:</p>
+								<pre><code class="language-typescript"><span class="hljs-keyword">const</span> cube = MeshFactory.generateUnitCube();</code></pre>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>scale: <span class="tsd-signature-type">number</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> scale: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The cube scale. If this is not set, the used scale is 1.</p>
+										<p>The code above will create a cube with 5 x 5 x 5:</p>
+										<pre><code class="language-typescript"><span class="hljs-keyword">const</span> cube = MeshFactory.generateUnitCube(<span class="hljs-number">5</span>);</code></pre>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span>edges<span class="tsd-signature-symbol">: </span><a href="../interfaces/edge.html" class="tsd-signature-type">Edge</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>points<span class="tsd-signature-symbol">: </span><a href="vector3.html" class="tsd-signature-type">Vector3</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>polygons<span class="tsd-signature-symbol">: </span><a href="../interfaces/polygon.html" class="tsd-signature-type">Polygon</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span></h4>
 							<ul class="tsd-parameters">
 								<li class="tsd-parameter">
 									<h5>edges<span class="tsd-signature-symbol">: </span><a href="../interfaces/edge.html" class="tsd-signature-type">Edge</a><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>the cube edges.</p>
+										</div>
+									</div>
 								</li>
 								<li class="tsd-parameter">
 									<h5>points<span class="tsd-signature-symbol">: </span><a href="vector3.html" class="tsd-signature-type">Vector3</a><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>the cube vertices.</p>
+										</div>
+									</div>
 								</li>
 								<li class="tsd-parameter">
 									<h5>polygons<span class="tsd-signature-symbol">: </span><a href="../interfaces/polygon.html" class="tsd-signature-type">Polygon</a><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>the cube polygons.</p>
+										</div>
+									</div>
 								</li>
 							</ul>
 						</li>
@@ -321,7 +334,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/EduardoJM/ts-phoria/blob/f8627e6/src/Phoria/MeshFactory.ts#L371">Phoria/MeshFactory.ts:371</a></li>
+									<li>Defined in <a href="https://github.com/EduardoJM/ts-phoria/blob/fcb95f5/src/Phoria/MeshFactory.ts#L414">Phoria/MeshFactory.ts:414</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -383,9 +396,6 @@
 					<li class="current tsd-kind-class">
 						<a href="meshfactory.html" class="tsd-kind-icon">Mesh<wbr>Factory</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="meshfactory.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
 								<a href="meshfactory.html#generateicosahedron" class="tsd-kind-icon">generate<wbr>Icosahedron</a>
 							</li>
@@ -475,13 +485,7 @@
 						<a href="../globals.html#calcnormalvector" class="tsd-kind-icon">calc<wbr>Normal<wbr>Vector</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="../globals.html#e" class="tsd-kind-icon">e</a>
-					</li>
-					<li class=" tsd-kind-function">
 						<a href="../globals.html#intersectioninsidepolygon" class="tsd-kind-icon">intersection<wbr>Inside<wbr>Polygon</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="../globals.html#p" class="tsd-kind-icon">p</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="../globals.html#planelineintersection" class="tsd-kind-icon">plane<wbr>Line<wbr>Intersection</a>
@@ -500,9 +504,6 @@
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="../globals.html#sortpolygons" class="tsd-kind-icon">sort<wbr>Polygons</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="../globals.html#v3" class="tsd-kind-icon">v3</a>
 					</li>
 				</ul>
 			</nav>

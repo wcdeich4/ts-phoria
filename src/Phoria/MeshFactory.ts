@@ -1,6 +1,11 @@
 import { Vector3 } from '../Math';
 import { Edge, Polygon } from './Interfaces';
 
+/**
+ * @ignore
+ * Makes a Vector3 vertex from the `x`, `y` and `z` object data.
+ * @param data the `x`, `y` and `z` data.
+ */
 function v3(data: {
     x: number;
     y: number;
@@ -9,6 +14,11 @@ function v3(data: {
     return Vector3.fromValues(data.x, data.y, data.z);
 }
 
+/**
+ * @ignore
+ * Makes a Edge from the `a` and `b` vertices.
+ * @param data the `a` and `b` vertices.
+ */
 function e(data: {
     a: number;
     b: number;
@@ -20,6 +30,11 @@ function e(data: {
     };
 }
 
+/**
+ * @ignore
+ * Makes a Polygon from the vertices collection.
+ * @param data the vertices collection.
+ */
 function p(data: {
     vertices: number[];
 }): Polygon {
@@ -28,14 +43,42 @@ function p(data: {
     } as Polygon;
 }
 
+/**
+ * A static class that contains some helper methods to create some meshs.
+ * @remark
+ * If you try to instantiate this class, like:
+ * ```typescript
+ * const a = new MeshFactory();
+ * ```
+ * the code will trown an `Error` with the message: "MeshFactory can not be instantiated".
+ */
 export class MeshFactory {
+    /** @ignore */
     constructor() {
         throw new Error('MeshFactory can not be instantiated');
     }
 
-    static generateUnitCube(scale: number) : {
+    /**
+     * Generate an "unitary" cube.
+     *
+     * The code above will create a cube with 1 x 1 x 1:
+     * ```typescript
+     * const cube = MeshFactory.generateUnitCube();
+     * ```
+     *
+     * @param scale The cube scale. If this is not set, the used scale is 1.
+     *
+     * The code above will create a cube with 5 x 5 x 5:
+     * ```typescript
+     * const cube = MeshFactory.generateUnitCube(5);
+     * ```
+     */
+    static generateUnitCube(scale?: number) : {
+        /** the cube vertices. */
         points: Vector3[];
+        /** the cube edges. */
         edges: Edge[];
+        /** the cube polygons. */
         polygons: Polygon[];
     } {
         const s = scale || 1;

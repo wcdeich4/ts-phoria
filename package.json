@@ -7,7 +7,7 @@
   "scripts": {
     "ex": "gulp examples",
     "build": "tsc",
-    "docs": "typedoc --out docs/ src/ --mode file"
+    "docs": "typedoc --out docs/ src/ --mode file --theme typedoc/theme --excludeNotExported --excludeExternals --excludePrivate"
   },
   "keywords": [],
   "phoriaAuthor": "Kevin Roast <kevtoast@yahoo.com> (http://www.kevs3d.co.uk/)",

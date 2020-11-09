@@ -3,15 +3,18 @@ import Vector2 from './Vector2';
 import Matrix4 from './Matrix4';
 
 /**
- * 3 Dimensional Vector.
+ * This class implements a three dimensional vector.
  */
 export default class Vector3 {
+    /** The `x` component of the vector. */
     0: number;
+    /** The `y` component of the vector. */
     1: number;
+    /** The `z` component of the vector. */
     2: number;
 
     /**
-     * Creates a new, empty Vector3.
+     * Creates a new, empty, Vector3.
      */
     constructor() {
         this[0] = 0;
@@ -31,7 +34,7 @@ export default class Vector3 {
     }
 
     /**
-     * Get a Vector2 with the x and y components of this Vector3.
+     * Get a Vector2 with the `x` and `y` components of this Vector3.
      */
     getVector2() : Vector2 {
         const v = new Vector2();
@@ -43,8 +46,8 @@ export default class Vector3 {
     }
 
     /**
-     * Get an Vector4 with the x, y and z components of this Vector3.
-     * @param w - the w Vector4 component.
+     * Get an Vector4 with the `x`, `y` and `z` components of this Vector3.
+     * @param w - the `w` Vector4 component. If this `w` component is not set, the zero is used.
      */
     toVector4(w?: number) : Vector4 {
         const v = new Vector4();
@@ -57,9 +60,9 @@ export default class Vector3 {
 
     /**
      * Set this Vector3 components.
-     * @param x - The Vector3 x component.
-     * @param y - The Vector3 y component.
-     * @param z - The Vector3 z component.
+     * @param x - The Vector3 `x` component.
+     * @param y - The Vector3 `y` component.
+     * @param z - The Vector3 `z` component.
      * @returns Returns this Vector3.
      */
     set(x: number, y: number, z: number): Vector3 {
@@ -244,9 +247,9 @@ export default class Vector3 {
 
     /**
      * Create a new Vector3 from the components.
-     * @param vx - x component.
-     * @param vy - y component.
-     * @param vz - z component.
+     * @param vx - `x` component.
+     * @param vy - `y` component.
+     * @param vz - `z` component.
      */
     static fromValues(vx: number, vy: number, vz: number): Vector3 {
         const v = new Vector3();

@@ -2,16 +2,20 @@ import Matrix4 from './Matrix4';
 import Vector3 from './Vector3';
 
 /**
- * 4 Dimensional Vector.
+ * This class implements a four dimensional vector.
  */
 export default class Vector4 {
+    /** The `x` component of the vector. */
     0: number;
+    /** The `y` component of the vector. */
     1: number;
+    /** The `z` component of the vector. */
     2: number;
+    /** The `w` component of the vector. */
     3: number;
 
     /**
-     * Creates a new, empty Vector4.
+     * Creates a new, empty, Vector4.
      */
     constructor() {
         this[0] = 0;
@@ -33,7 +37,7 @@ export default class Vector4 {
     }
 
     /**
-     * Get a Vector3 with the x, y and z components of this Vector4.
+     * Get a Vector3 with the `x`, `y` and `z` components of this Vector4.
      */
     getVector3() : Vector3 {
         const v = new Vector3();
@@ -48,10 +52,10 @@ export default class Vector4 {
 
     /**
      * Set this Vector4 components.
-     * @param x - The Vector4 x component.
-     * @param y - The Vector4 y component.
-     * @param z - The Vector4 z component.
-     * @param w - The Vector4 w component.
+     * @param x - The Vector4 `x` component.
+     * @param y - The Vector4 `y` component.
+     * @param z - The Vector4 `z` component.
+     * @param w - The Vector4 `w` component.
      * @returns Returns this Vector4.
      */
     set(x: number, y: number, z: number, w: number): Vector4 {
@@ -208,10 +212,10 @@ export default class Vector4 {
 
     /**
      * Create a new Vector4 from the components.
-     * @param vx - x component.
-     * @param vy - y component.
-     * @param vz - z component.
-     * @param vw - w component.
+     * @param vx - `x` component.
+     * @param vy - `y` component.
+     * @param vz - `z` component.
+     * @param vw - `w` component.
      */
     static fromValues(vx: number, vy: number, vz: number, vw: number) : Vector4 {
         const v = new Vector4();

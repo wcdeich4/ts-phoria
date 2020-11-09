@@ -1,5 +1,10 @@
 /**
  * Degree to radians conversion factor.
+ * @remarks
+ * To convert degree angle to radians, you just need multiply:
+ * ```typescript
+ * const radianAngle = degreeAngle * RADIANS;
+ * ```
  */
 export const RADIANS = Math.PI / 180.0;
 

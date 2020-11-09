@@ -2,14 +2,16 @@ import Vector3 from './Vector3';
 import Vector4 from './Vector4';
 
 /**
- * 2 Dimensional Vector.
+ * This class implements a two dimensional vector.
  */
 export default class Vector2 {
+    /** The `x` component of the vector. */
     0: number;
+    /** The `y` component of the vector. */
     1: number;
 
     /**
-     * Creates a new, empty Vector2.
+     * Creates a new, empty, Vector2.
      */
     constructor() {
         this[0] = 0;
@@ -27,8 +29,8 @@ export default class Vector2 {
     }
 
     /**
-     * Get an Vector3 with the x and y components of this Vector2.
-     * @param z - the z Vector3 component.
+     * Get an Vector3 with the `x` and `y` components of this Vector2.
+     * @param z - the `z` Vector3 component. If this `z` component is not set, the zero is used.
      */
     toVector3(z?: number) : Vector3 {
         const v = new Vector3();
@@ -39,9 +41,9 @@ export default class Vector2 {
     }
 
     /**
-     * Get an Vector4 with the x and y components of this Vector2.
-     * @param z - the z Vector4 component.
-     * @param w - the w Vector4 component.
+     * Get an Vector4 with the `x` and `y` components of this Vector2.
+     * @param z - the `z` Vector4 component. If this `z` component is not set, the zero is used.
+     * @param w - the `w` Vector4 component. If this `w` component is not set, the zero is used.
      */
     toVector4(z?: number, w?: number) : Vector4 {
         const v = new Vector4();
@@ -54,8 +56,8 @@ export default class Vector2 {
 
     /**
      * Set this Vector2 components.
-     * @param x - The Vector2 x component.
-     * @param y - The Vector2 y component.
+     * @param x - The Vector2 `x` component.
+     * @param y - The Vector2 `y` component.
      * @returns Returns this Vector2.
      */
     set(x: number, y: number): Vector2 {
@@ -144,7 +146,7 @@ export default class Vector2 {
     }
 
     /**
-     * Scales this Vector2 by a scalar number.
+     * Scales this Vector2 by a `scalar` number.
      * @param scalar - Amount to scale the vector by.
      * @returns Returns this Vector2.
      */
@@ -194,8 +196,8 @@ export default class Vector2 {
 
     /**
      * Create a new Vector2 from the components.
-     * @param vx - x component.
-     * @param vy - y component.
+     * @param vx - `x` component.
+     * @param vy - `y` component.
      */
     static fromValues(vx: number, vy: number): Vector2 {
         const v = new Vector2();
