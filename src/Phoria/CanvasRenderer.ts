@@ -39,7 +39,7 @@ export class CanvasRenderer extends Renderer {
             const obj = entity;
             this.ctx.save();
             if (obj.style.compositeOperation) {
-                this.ctx.globalCompositeOperation = obj.style.compositeOperation;
+                this.ctx.globalCompositeOperation = <GlobalCompositeOperation>obj.style.compositeOperation;
             }
             if (obj.style.drawmode === 'solid') {
                 // ensure line width is set if appropriate fillmode is being used
