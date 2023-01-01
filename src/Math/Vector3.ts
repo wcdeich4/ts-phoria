@@ -34,6 +34,35 @@ export default class Vector3 {
     }
 
     /**
+     * Get vector that is arethmetic average of multiple other vectors
+     * @param {...Vector3[]} vectorArrayarray params array of Vector3 objects
+     * @returns {Vector3} average vector
+     */
+    public static GetAverage(...vectorArray: Vector3[]): Vector3{
+        return Vector3.GetAverageForArray(vectorArray);
+    }
+
+    /**
+     * Get vector that is arethmetic average of multiple other vectors
+     * @param {Vector3[]}  vectorArrayarray array of Vector3 objects
+     * @returns {Vector3} average vector
+     */
+    public static GetAverageForArray(vectorArray: Vector3[]): Vector3{
+        let result = new Vector3();
+        if ((vectorArray != null) && (vectorArray.length > 0)){
+            for(let i = 0; i < vectorArray.length; i++){
+                result[0] += vectorArray[i][0];
+                result[1] += vectorArray[i][1];
+                result[2] += vectorArray[i][2];
+            }
+            result[0] = result[0] / vectorArray.length;
+            result[1] = result[1] / vectorArray.length;
+            result[2] = result[2] / vectorArray.length;
+        }
+        return result;
+    }
+
+    /**
      * Get a Vector2 with the `x` and `y` components of this Vector3.
      */
     getVector2() : Vector2 {
