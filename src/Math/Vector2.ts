@@ -21,7 +21,7 @@ export default class Vector2 {
     /**
      * Clone this Vector2 to another.
      */
-    clone() : Vector2 {
+     public clone() : Vector2 {
         const out = new Vector2();
         out[0] = this[0];
         out[1] = this[1];
@@ -32,7 +32,7 @@ export default class Vector2 {
      * Get an Vector3 with the `x` and `y` components of this Vector2.
      * @param z - the `z` Vector3 component. If this `z` component is not set, the zero is used.
      */
-    toVector3(z?: number) : Vector3 {
+     public toVector3(z?: number) : Vector3 {
         const v = new Vector3();
         v[0] = this[0];
         v[1] = this[1];
@@ -45,7 +45,7 @@ export default class Vector2 {
      * @param z - the `z` Vector4 component. If this `z` component is not set, the zero is used.
      * @param w - the `w` Vector4 component. If this `w` component is not set, the zero is used.
      */
-    toVector4(z?: number, w?: number) : Vector4 {
+     public toVector4(z?: number, w?: number) : Vector4 {
         const v = new Vector4();
         v[0] = this[0];
         v[1] = this[1];
@@ -60,7 +60,7 @@ export default class Vector2 {
      * @param y - The Vector2 `y` component.
      * @returns Returns this Vector2.
      */
-    set(x: number, y: number): Vector2 {
+     public set(x: number, y: number): Vector2 {
         this[0] = x;
         this[1] = y;
         return this;
@@ -70,16 +70,23 @@ export default class Vector2 {
      * Normalize this Vector2 (Set the length of this vector to 1).
      * @returns Returns this Vector2.
      */
-    normalize(): Vector2 {
-        const x = this[0];
-        const y = this[1];
-        let len = x * x + y * y;
+     public normalize(): Vector2 {
+        const len = this.length();
         if (len > 0) {
-            len = 1 / Math.sqrt(len);
-            this[0] = x * len;
-            this[1] = y * len;
+            this[0] = this[0] / len;
+            this[1] = this[1] / len;
         }
         return this;
+    }
+
+    /**
+     * Get a normalized copy of vector v
+     * @param v {Vector2} vector to normalize
+     * @returns {Vector2} new vector2 that is normalized version of v
+     */
+    public static normalize(v: Vector2): Vector2 {
+        const result = v.clone();
+        return result.normalize();
     }
 
     /**
@@ -94,9 +101,7 @@ export default class Vector2 {
      * Calculates the length of this Vector2.
      */
     length(): number {
-        const x = this[0];
-        const y = this[1];
-        return Math.sqrt(x * x + y * y);
+        return Math.sqrt(this[0] * this[0]    +     this[1] * this[1]);
     }
 
     /**
